@@ -10,6 +10,15 @@ public class Main {
         cliente1.addProduto(notebook);
         cliente1.addProduto(mouse);
         cliente1.addProduto(notebook);
-        cliente1.verCarrinho();
+
+        //Estoque.removerEstoque(notebook, 4);
+        //cliente1.verCarrinho();
+
+        //System.out.println(Compra.calcularTotal(cliente1.getCarrinho()));
+
+        Compra.finalizarCompra(cliente1.getCarrinho());
+
+
+        System.out.println(Estoque.getEstoque(notebook));
     }
 }

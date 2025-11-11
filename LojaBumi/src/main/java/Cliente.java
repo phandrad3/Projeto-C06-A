@@ -8,6 +8,10 @@ public class Cliente extends Usuario {
         super(idUsuario, nome, dataNasc, email, senha);
     }
 
+    public Map<Produto, Integer> getCarrinho() {
+        return carrinho;
+    }
+
     public void addProduto(Produto produto) {
         int quantidadeCarrinho = carrinho.getOrDefault(produto, 0);
 
