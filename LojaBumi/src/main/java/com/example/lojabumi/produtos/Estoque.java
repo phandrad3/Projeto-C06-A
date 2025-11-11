@@ -51,7 +51,7 @@ public class Estoque {
         }
     }
 
-    public static void listarProdutosEmEstoque(Usuario usuario) {
+    public static void listarEstoque(Usuario usuario) {
         if (!usuario.liberarAcesso()) return;
 
         System.out.println("\n=== LISTA DE PRODUTOS EM ESTOQUE ===");
