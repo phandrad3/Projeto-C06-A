@@ -1,10 +1,10 @@
 package com.example.lojabumi.produtos.tipo;
 
-import com.example.lojabumi.produtos.Produtos;
+import com.example.lojabumi.produtos.Produto;
 
-public class Frios extends Produtos {
+public class Frios extends Produto {
 
-    public Frios(int idProduto, String nome, int quantidade, double preco){
-        super(idProduto, nome, quantidade, preco);
+    public Frios(int idProduto, String nome, double preco){
+        super(idProduto, nome, preco);
     }
 }
