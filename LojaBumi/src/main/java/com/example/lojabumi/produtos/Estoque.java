@@ -8,16 +8,8 @@ public class Estoque {
     private static final Map<Integer, Integer> estoque = new HashMap<>();
     private static final Map<Integer, Produto> produtosMap = new HashMap<>();
 
-    private static boolean verificarAdministrador(Usuario usuario) {
-        if (usuario == null || !usuario.isAdministrador()) {
-            System.err.println("Ta brokiado.");
-            return false;
-        }
-        return true;
-    }
-
     public static void adicionarEstoque(Produto produto, int quantidade, Usuario usuario) {
-        if (!verificarAdministrador(usuario)) return;
+        if (!usuario.liberarAcesso()) return;
         if (produto == null || quantidade <= 0) {
             System.err.println("Erro: Produto inválido ou quantidade não positiva.");
             return;
@@ -31,7 +23,7 @@ public class Estoque {
     }
 
     public static boolean atualizarEstoque(Produto produto, int novaQuantidade, Usuario usuario) {
-        if (!verificarAdministrador(usuario)) return false;
+        if (!usuario.liberarAcesso()) return false;
         if (produto == null || novaQuantidade < 0) {
             System.err.println("Erro: Produto inválido ou quantidade negativa.");
             return false;
@@ -46,7 +38,7 @@ public class Estoque {
     }
 
     public static void removerProduto(Produto produto, Usuario usuario) {
-        if (!verificarAdministrador(usuario)) return;
+        if (!usuario.liberarAcesso()) return;
         if (produto == null) return;
 
         int idProduto = produto.getIdProduto();
@@ -60,7 +52,7 @@ public class Estoque {
     }
 
     public static void listarProdutosEmEstoque(Usuario usuario) {
-        if (!verificarAdministrador(usuario)) return;
+        if (!usuario.liberarAcesso()) return;
 
         System.out.println("\n=== LISTA DE PRODUTOS EM ESTOQUE ===");
         if (estoque.isEmpty()) {

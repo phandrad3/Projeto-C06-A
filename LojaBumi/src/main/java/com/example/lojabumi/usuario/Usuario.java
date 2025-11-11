@@ -36,4 +36,12 @@ public abstract class Usuario {
     }
 
     public abstract boolean isAdministrador();
+
+    public boolean liberarAcesso() {
+        if (!isAdministrador()) {
+            System.err.println("Ta brokiado");
+            return false;
+        }
+        return true;
+    }
 }

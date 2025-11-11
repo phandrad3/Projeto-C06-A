@@ -11,18 +11,7 @@ public class Administrador extends Usuario {
     }
 
     public void alterarPrecoProduto(Produto produto, double novoPreco) {
-        if (produto == null) {
-            System.err.println("Erro: Produto inválido.");
-            return;
-        }
-
-        if (novoPreco <= 0) {
-            System.err.println("Erro: preço inválido.");
-            return;
-        }
-
-        produto.atualizarPreco(novoPreco);
-        System.out.println("Preço do produto '" + produto.getNome() + "' alterado para R$ " + String.format("%.2f", novoPreco));
+        produto.atualizarPreco(novoPreco, this);
     }
 
     public void adicionarProdutoAoEstoque(Produto produto, int quantidade) {

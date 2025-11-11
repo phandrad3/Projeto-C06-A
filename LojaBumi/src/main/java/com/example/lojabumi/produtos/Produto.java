@@ -1,21 +1,21 @@
 package com.example.lojabumi.produtos;
 
-public abstract class Produto {
-    // atributos
+import com.example.lojabumi.usuario.Usuario;
 
+public abstract class Produto {
     protected int idProduto;
     protected String nome;
     protected double preco;
 
-    // métodos
-
-    public Produto(int idProduto, String nome, double preco){
+    public Produto(int idProduto, String nome, double preco) {
         this.idProduto = idProduto;
         this.nome = nome;
         this.preco = preco;
     }
 
-    public void atualizarPreco(double novoPreco) {
+    public void atualizarPreco(double novoPreco, Usuario usuario) {
+        if (!usuario.liberarAcesso()) return;
+
         if (novoPreco <= 0) {
             System.out.println("Preço inválido!");
         } else {
@@ -24,14 +24,14 @@ public abstract class Produto {
         }
     }
 
-    // getters e setters
-
     public int getIdProduto() {
         return idProduto;
     }
+
     public String getNome() {
         return nome;
     }
+
     public double getPreco() {
         return preco;
     }
