@@ -1,3 +1,9 @@
+package com.example.lojabumi.usuario.tipoConta;
+
+import com.example.lojabumi.produtos.Estoque;
+import com.example.lojabumi.produtos.Produto;
+import com.example.lojabumi.usuario.Usuario;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -6,6 +12,10 @@ public class Cliente extends Usuario {
 
     public Cliente(int idUsuario, String nome, String dataNasc, String email, String senha) {
         super(idUsuario, nome, dataNasc, email, senha);
+    }
+
+    public Map<Produto, Integer> getCarrinho() {
+        return carrinho;
     }
 
     public void addProduto(Produto produto) {
@@ -37,5 +47,10 @@ public class Cliente extends Usuario {
             System.out.println("TOTAL DO CARRINHO: R$ " + String.format("%.2f", total));
         }
         System.out.println("--------------------\n");
+    }
+
+    @Override
+    public boolean isAdministrador() {
+        return false;
     }
 }
