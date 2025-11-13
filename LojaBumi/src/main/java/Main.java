@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        Produto notebook = new Produto(1, "Notebook Pro", 3500.00);
-        Produto mouse = new Produto(2, "Mouse Wireless", 150.00);
+        Produto notebook = new Produto("Notebook Pro", 3500.00);
+        Produto mouse = new Produto("Mouse Wireless", 150.00);
 
         Estoque.adicionarEstoque(notebook, 5);
         Estoque.adicionarEstoque(mouse, 10);
@@ -16,9 +16,13 @@ public class Main {
 
         //System.out.println(Compra.calcularTotal(cliente1.getCarrinho()));
 
+        Estoque.exibirEstoque();
+
         Compra.finalizarCompra(cliente1.getCarrinho());
 
+        Estoque.exibirEstoque();
 
-        System.out.println(Estoque.getEstoque(notebook));
+
+        //System.out.println(Estoque.getEstoque(notebook));
     }
 }

@@ -1,17 +1,26 @@
 public class Produto {
+    private static int nextId = 1;
     private int id;
     private String nome;
     private double preco;
 
-    public Produto(int id, String nome, double preco) {
-        this.id = id;
+    public Produto(String nome, double preco) {
+        this.id = nextId++;
         this.nome = nome;
         this.preco = preco;
     }
 
-    public int getId() { return id; }
-    public String getNome() { return nome; }
-    public double getPreco() { return preco; }
+    public int getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -21,5 +30,10 @@ public class Produto {
 
         Produto produto = (Produto) o;
         return id == produto.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 }
