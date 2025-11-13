@@ -1,3 +1,9 @@
+package com.example.lojabumi.utilitarios;
+
+import com.example.lojabumi.produtos.Estoque;
+import com.example.lojabumi.produtos.Produto;
+import com.example.lojabumi.usuario.Usuario;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +21,7 @@ public class Compra {
         return total;
     }
 
-    public static boolean finalizarCompra(Map<Produto, Integer> carrinho) {
+    public static boolean finalizarCompra(Map<Produto, Integer> carrinho, Usuario usuario) {
         List<Produto> produtosInsuficientes = new ArrayList<>();
 
         for (Map.Entry<Produto, Integer> entry : carrinho.entrySet()) {
@@ -48,7 +54,7 @@ public class Compra {
         for (Map.Entry<Produto, Integer> entry : carrinho.entrySet()) {
             Produto produto = entry.getKey();
             int quantidade = entry.getValue();
-            Estoque.removerEstoque(produto, quantidade);
+            Estoque.removerEstoque(produto, quantidade, usuario);
         }
 
         System.out.println("\n--- COMPRA FINALIZADA COM SUCESSO ---");

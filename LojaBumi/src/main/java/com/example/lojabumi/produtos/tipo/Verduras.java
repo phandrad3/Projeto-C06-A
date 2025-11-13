@@ -4,7 +4,7 @@ import com.example.lojabumi.produtos.Produto;
 
 public class Verduras extends Produto {
 
-    public Verduras(int idProduto, String nome, double preco) {
-        super(idProduto, nome, preco);
+    public Verduras(String nome, double preco) {
+        super(nome, preco);
     }
 }

@@ -3,29 +3,19 @@ package com.example.lojabumi.produtos;
 import com.example.lojabumi.usuario.Usuario;
 
 public abstract class Produto {
-    protected int idProduto;
-    protected String nome;
-    protected double preco;
+    private static int nextId = 1;
+    private int id;
+    private String nome;
+    private double preco;
 
-    public Produto(int idProduto, String nome, double preco) {
-        this.idProduto = idProduto;
+    public Produto(String nome, double preco) {
+        this.id = nextId++;
         this.nome = nome;
         this.preco = preco;
     }
 
-    public void atualizarPreco(double novoPreco, Usuario usuario) {
-        if (!usuario.liberarAcesso()) return;
-
-        if (novoPreco <= 0) {
-            System.out.println("Preço inválido!");
-        } else {
-            this.preco = novoPreco;
-            System.out.println("Preço do produto '" + nome + "' atualizado para R$ " + String.format("%.2f", preco));
-        }
-    }
-
-    public int getIdProduto() {
-        return idProduto;
+    public int getId() {
+        return id;
     }
 
     public String getNome() {
@@ -34,5 +24,20 @@ public abstract class Produto {
 
     public double getPreco() {
         return preco;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Produto produto = (Produto) o;
+        return id == produto.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 }
