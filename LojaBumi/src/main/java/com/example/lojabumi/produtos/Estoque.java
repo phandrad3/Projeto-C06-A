@@ -1,15 +1,18 @@
 package com.example.lojabumi.produtos;
+
+import com.example.lojabumi.usuario.Permissao;
 import com.example.lojabumi.usuario.Usuario;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Estoque {
+
     private static Map<Integer, Integer> estoque = new HashMap<>();
     private static Map<Integer, Produto> produtos = new HashMap<>();
 
-    public static boolean adicionarEstoque(Produto produto, int quantidade, Usuario usuario) {
-        if (!usuario.liberarAcesso()) return false;
+    public static boolean adicionarEstoque(Produto produto, int quantidade, Permissao usuario) {
+        if (!usuario.addEstoque()) return false;
 
         if (produto == null || quantidade <= 0) {
             System.err.println("Erro: Produto inválido ou quantidade não positiva.");
@@ -26,8 +29,8 @@ public class Estoque {
         return true;
     }
 
-    public static boolean atualizarEstoque(Produto produto, int novaQuantidade, Usuario usuario) {
-        if (!usuario.liberarAcesso()) return false;
+    public static boolean atualizarEstoque(Produto produto, int novaQuantidade, Permissao usuario) {
+        if (!usuario.alterarEstoque()) return false;
 
         if (produto == null || novaQuantidade < 0) {
             System.err.println("Erro: Produto inválido ou quantidade negativa.");
@@ -37,39 +40,51 @@ public class Estoque {
         int idProduto = produto.getId();
         estoque.put(idProduto, novaQuantidade);
         produtos.put(idProduto, produto);
-        System.out.println("Estoque do produto '" + produto.getNome() + "' (ID: " + idProduto +
-                ") atualizado para " + novaQuantidade + " unidade(s).");
+
+        System.out.println("Quantidade atualizada do produto '" + produto.getNome() + "' para " + novaQuantidade);
+        return true;
+    }
+
+    public static boolean atualizarValor(Produto produto, double novoValor, Permissao usuario) {
+        if (!usuario.alterarPreco()) return false;
+
+        if (produto == null || novoValor <= 0) {
+            System.err.println("Erro: Produto inválido ou valor inválido.");
+            return false;
+        }
+
+        produto.setPreco(novoValor);
+        System.out.println("Preço do produto '" + produto.getNome() + "' alterado para R$ " + novoValor);
 
         return true;
     }
 
     public static int getEstoque(Produto produto) {
         if (produto == null) return 0;
-
         return estoque.getOrDefault(produto.getId(), 0);
     }
 
-    public static boolean removerEstoque(Produto produto, int quantidade, Usuario usuario) {
-        if (!usuario.liberarAcesso()) return false;
+    public static boolean removerEstoque(Produto produto, int quantidade, Permissao usuario) {
+        if (!usuario.alterarEstoque()) return false;
 
         if (produto == null || quantidade <= 0) return false;
 
         int idProduto = produto.getId();
         int estoqueAtual = getEstoque(produto);
 
-        if (estoqueAtual >= quantidade) {
-            estoque.put(idProduto, estoqueAtual - quantidade);
-            return true;
-        }
-        return false;
+        if (estoqueAtual < quantidade) return false;
+
+        estoque.put(idProduto, estoqueAtual - quantidade);
+        return true;
     }
 
-    public static boolean removerProduto(Produto produto, Usuario usuario) {
-        if (!usuario.liberarAcesso()) return false;
+    public static boolean removerProduto(Produto produto, Permissao usuario) {
+        if (!usuario.removerProduto()) return false;
 
         if (produto == null) return false;
 
         int idProduto = produto.getId();
+
         if (estoque.containsKey(idProduto)) {
             estoque.remove(idProduto);
             produtos.remove(idProduto);
@@ -83,22 +98,25 @@ public class Estoque {
 
     public static void exibirEstoque() {
         System.out.println("\n--- ESTOQUE COMPLETO ---");
+
         if (estoque.isEmpty()) {
             System.out.println("O estoque está vazio.");
         } else {
             System.out.println("ID | Nome | Preço | Quantidade");
-            System.out.println("---------------------------------");
+            System.out.println("--------------------------------");
+
             for (Map.Entry<Integer, Integer> entry : estoque.entrySet()) {
-                int idProduto = entry.getKey();
+                int id = entry.getKey();
                 int quantidade = entry.getValue();
-                Produto produto = produtos.get(idProduto);
+                Produto produto = produtos.get(id);
 
                 if (produto != null) {
-                    System.out.println(idProduto + " | " + produto.getNome() + " | R$ " +
-                            String.format("%.2f", produto.getPreco()) + " | " + quantidade);
+                    System.out.println(id + " | " + produto.getNome() + " | R$ " +
+                            String.format("%.2f", produto.getPreco()) +
+                            " | " + quantidade);
                 }
             }
         }
-        System.out.println("------------------------\n");
+        System.out.println("--------------------------\n");
     }
 }

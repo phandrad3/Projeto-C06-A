@@ -2,13 +2,35 @@ package com.example.lojabumi.utilitarios;
 
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
+import com.example.lojabumi.usuario.Permissao;
 import com.example.lojabumi.usuario.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Compra {
+public class Compra implements Permissao {
+
+    @Override
+    public boolean alterarEstoque() {
+        return true;
+    }
+
+    @Override
+    public boolean alterarPreco() {
+        return false;
+    }
+
+    @Override
+    public boolean addEstoque() {
+        return false;
+    }
+
+    @Override
+    public boolean removerProduto() {
+        return false;
+    }
+
     public static double calcularTotal(Map<Produto, Integer> carrinho) {
         double total = 0.0;
 
@@ -51,15 +73,17 @@ public class Compra {
             return false;
         }
 
+        Compra compra = new Compra();
+
         for (Map.Entry<Produto, Integer> entry : carrinho.entrySet()) {
             Produto produto = entry.getKey();
             int quantidade = entry.getValue();
-            Estoque.removerEstoque(produto, quantidade, usuario);
+
+            Estoque.removerEstoque(produto, quantidade, compra);
         }
 
-        System.out.println("\n--- COMPRA FINALIZADA COM SUCESSO ---");
-        System.out.println("Todos os produtos foram removidos do estoque.");
-        System.out.println("--------------------------------------\n");
+        System.out.println("\n--- COMPRA FINALIZADA COM SUCESSO ---\n");
         return true;
     }
+
 }
