@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="30.0" style="-fx-padding: 50; -fx-background-color: #1E293B;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lojabumi.Controllers.Carrinho.CarrinhoController">
+    <children>
+        <!-- Título da tela -->
+        <Label alignment="CENTER" text="Carrinho de Compras" textFill="WHITE">
+            <font>
+                <Font name="Constantia Italic" size="50.0" />
+            </font>
+        </Label>
+
+        <!-- ListView para exibir os itens do carrinho -->
+        <ListView fx:id="listCarrinho" style="-fx-background-color: #334155; -fx-font-size: 24px; -fx-text-fill: white;">
+            <VBox.vgrow>ALWAYS</VBox.vgrow>
+        </ListView>
+
+        <!-- Label para o total -->
+        <Label fx:id="labelTotal" alignment="CENTER" text="Total: R$ 0,00" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+
+        <!-- HBox para botões de ação -->
+        <HBox alignment="CENTER" spacing="20.0">
+            <children>
+                <Button fx:id="btnFinalizarCompra" style="-fx-background-color: #0EA5E9; -fx-text-fill: white; -fx-font-size: 18px; -fx-border-radius: 10; -fx-background-radius: 10;" text="Finalizar Compra">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Button>
+                <Button fx:id="btnVoltarProdutos" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-size: 18px; -fx-border-radius: 10; -fx-background-radius: 10;" text="Voltar aos Produtos">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Button>
+                <Button fx:id="btnLimparCarrinho" style="-fx-background-color: #0EA5E9; -fx-text-fill: white; -fx-font-size: 18px; -fx-border-radius: 10; -fx-background-radius: 10;" text="Limpar Carrinho">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Button>
+            </children>
+        </HBox>
+    </children>
+</VBox>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="25.0" style="-fx-padding: 50; -fx-background-color: #1E293B;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lojabumi.Controllers.Produtos.ProdutosController">
+
+    <TitledPane animated="false" collapsible="false" style="-fx-background-color: #1E293B; -fx-text-fill: white;" text="Menu" textFill="#000000">
+        <content>
+            <AnchorPane prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #1E293B;">
+                <children>
+                    <Button fx:id="sair" layoutX="20.0" layoutY="10.0" prefHeight="40.0" prefWidth="100.0" style="-fx-font-size: 16px; -fx-background-color: #334155;" text="Sair" textFill="WHITE" />
+                    <Button fx:id="estoque" onAction="#entrarEstoque" layoutX="140.0" layoutY="10.0" prefHeight="40.0" prefWidth="160.0" style="-fx-font-size: 16px; -fx-background-color: #334155;" text="Ir para Estoque" textFill="WHITE" />
+                    <Button fx:id="btncarrinho"  layoutX="320.0" layoutY="10.0" prefHeight="40.0" prefWidth="160.0" style="-fx-font-size: 16px; -fx-background-color: #334155;" text="Ver Carrinho" textFill="WHITE" />
+                </children>
+            </AnchorPane>
+        </content>
+        <font>
+            <Font name="Candara" size="16.0" />
+        </font>
+    </TitledPane>
+
+    <Label style="-fx-font-weight: italic; -fx-font-size: 50px;" text="Produtos" textFill="WHITE">
+        <font>
+            <Font name="System Italic" size="50.0" />
+        </font></Label>
+
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefViewportHeight="700.0" prefViewportWidth="1000.0" style="-fx-background: transparent;" vbarPolicy="AS_NEEDED">
+        <GridPane alignment="CENTER" hgap="150.0" style="-fx-padding: 40; -fx-background-color: #1E293B;" vgap="50">
+
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <Label style="-fx-font-size: 22px;" text="Produto 1" textFill="WHITE" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: lightgreen;" text="R$ 29,99" />
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #007944; -fx-background-color: lightgreen; -fx-padding: 4 8 4 8;" text="Qtd: 10" />
+                <Button onAction="#adicionarAoCarrinho" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6;" text="Adicionar ao Carrinho" />
+            </VBox>
+
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <Label style="-fx-font-size: 22px;" text="Produto 2" textFill="WHITE" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: lightgreen;" text="R$ 49,99" />
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #007944; -fx-background-color: lightgreen; -fx-padding: 4 8 4 8;" text="Qtd: 5" />
+                <Button onAction="#adicionarAoCarrinho" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6;" text="Adicionar ao Carrinho" />
+            </VBox>
+
+            <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="2">
+                <Label style="-fx-font-size: 22px;" text="Produto 3" textFill="WHITE" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: lightgreen;" text="R$ 19,99" />
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #007944; -fx-background-color: lightgreen; -fx-padding: 4 8 4 8;" text="Qtd: 20" />
+                <Button onAction="#adicionarAoCarrinho" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6;" text="Adicionar ao Carrinho" />
+            </VBox>
+
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <Label style="-fx-font-size: 22px;" text="Produto 4" textFill="WHITE" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: lightgreen;" text="R$ 19,99" />
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #007944; -fx-background-color: lightgreen; -fx-padding: 4 8 4 8;" text="Qtd: 15" />
+                <Button onAction="#adicionarAoCarrinho" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6;" text="Adicionar ao Carrinho" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <Label style="-fx-font-size: 22px;" text="Produto 5" textFill="WHITE" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: lightgreen;" text="R$ 19,99" />
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #007944; -fx-background-color: lightgreen; -fx-padding: 4 8 4 8;" text="Qtd: 8" />
+                <Button onAction="#adicionarAoCarrinho" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6;" text="Adicionar ao Carrinho" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <Label style="-fx-font-size: 22px;" text="Produto 6" textFill="WHITE" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: lightgreen;" text="R$ 19,99" />
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #007944; -fx-background-color: lightgreen; -fx-padding: 4 8 4 8;" text="Qtd: 12" />
+                <Button onAction="#adicionarAoCarrinho" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6;" text="Adicionar ao Carrinho" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                <Label style="-fx-font-size: 22px;" text="Produto 7" textFill="WHITE" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: lightgreen;" text="R$ 19,99" />
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #007944; -fx-background-color: lightgreen; -fx-padding: 4 8 4 8;" text="Qtd: 7" />
+                <Button onAction="#adicionarAoCarrinho" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6;" text="Adicionar ao Carrinho" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <Label style="-fx-font-size: 22px;" text="Produto 8" textFill="WHITE" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: lightgreen;" text="R$ 19,99" />
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #007944; -fx-background-color: lightgreen; -fx-padding: 4 8 4 8;" text="Qtd: 3" />
+                <Button onAction="#adicionarAoCarrinho" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6;" text="Adicionar ao Carrinho" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <Label style="-fx-font-size: 22px;" text="Produto 9" textFill="WHITE" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: lightgreen;" text="R$ 19,99" />
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #007944; -fx-background-color: lightgreen; -fx-padding: 4 8 4 8;" text="Qtd: 25" />
+                <Button onAction="#adicionarAoCarrinho" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6;" text="Adicionar ao Carrinho" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                <Label style="-fx-font-size: 22px;" text="Produto 10" textFill="WHITE" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: lightgreen;" text="R$ 19,99" />
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #007944; -fx-background-color: lightgreen; -fx-padding: 4 8 4 8;" text="Qtd: 9" />
+                <Button onAction="#adicionarAoCarrinho" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6;" text="Adicionar ao Carrinho" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <Label style="-fx-font-size: 22px;" text="Produto 11" textFill="WHITE" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: lightgreen;" text="R$ 19,99" />
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #007944; -fx-background-color: lightgreen; -fx-padding: 4 8 4 8;" text="Qtd: 14" />
+                <Button onAction="#adicionarAoCarrinho" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6;" text="Adicionar ao Carrinho" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                <Label style="-fx-font-size: 22px;" text="Produto 12" textFill="WHITE" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: lightgreen;" text="R$ 19,99" />
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #007944; -fx-background-color: lightgreen; -fx-padding: 4 8 4 8;" text="Qtd: 6" />
+                <Button onAction="#adicionarAoCarrinho" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6;" text="Adicionar ao Carrinho" />
+            </VBox>
+
+            <columnConstraints>
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+        </GridPane>
+    </ScrollPane>
+</VBox>
