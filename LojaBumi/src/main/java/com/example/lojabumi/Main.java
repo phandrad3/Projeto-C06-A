@@ -29,7 +29,7 @@ public class Main {
         cliente1.verCarrinho();
 
         Estoque.exibirEstoque();
-        Compra.finalizarCompra(cliente1.getCarrinho(), cliente1);
+        Compra.finalizarCompra(cliente1.getCarrinho());
         Estoque.exibirEstoque();
 
         System.out.println("\n=== ESTOQUE FINAL (VISÃO DO ADMIN) ===");

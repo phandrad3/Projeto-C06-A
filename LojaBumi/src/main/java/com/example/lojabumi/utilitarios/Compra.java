@@ -43,7 +43,7 @@ public class Compra implements Permissao {
         return total;
     }
 
-    public static boolean finalizarCompra(Map<Produto, Integer> carrinho, Usuario usuario) {
+    public static boolean finalizarCompra(Map<Produto, Integer> carrinho) {
         List<Produto> produtosInsuficientes = new ArrayList<>();
 
         for (Map.Entry<Produto, Integer> entry : carrinho.entrySet()) {
