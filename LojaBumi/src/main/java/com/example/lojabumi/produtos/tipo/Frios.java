@@ -7,4 +7,5 @@ public class Frios extends Produto {
     public Frios(String nome, double preco){
         super(nome, preco);
     }
+
 }
