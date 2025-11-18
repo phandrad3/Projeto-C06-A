@@ -1,6 +1,7 @@
 package com.example.lojabumi.Controllers.Cadastro;
 
 import com.example.lojabumi.UserDatabase;
+import com.example.lojabumi.usuario.tipoConta.Administrador;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -27,8 +28,8 @@ public class CadastroController {
 
         if (usuario != null) {
 
-            if (usuario instanceof com.example.lojabumi.usuario.tipoConta.Administrador) {
-                System.out.println("Entrou admin");
+            if (usuario instanceof Administrador) {
+                System.out.println("Entrou o brabao");
                 mudarTela(btnEntrar,"/view/Produtos.fxml");
             } else {
                 System.out.println("entrou clientela porra");

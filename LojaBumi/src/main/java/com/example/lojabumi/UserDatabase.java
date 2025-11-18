@@ -20,7 +20,7 @@ public class UserDatabase {
             if (u instanceof Cliente) {
                 Cliente c = (Cliente) u;
                 if (c.getEmail().equals(email) && c.getSenha().equals(senha)) {
-                    usuarioLogado = c; // <-- AQUI
+                    usuarioLogado = c;
                     return c;
                 }
             }
@@ -28,7 +28,7 @@ public class UserDatabase {
             if (u instanceof Administrador) {
                 Administrador a = (Administrador) u;
                 if (a.getEmail().equals(email) && a.getSenha().equals(senha)) {
-                    usuarioLogado = a; // <-- AQUI
+                    usuarioLogado = a;
                     return a;
                 }
             }

@@ -10,9 +10,10 @@ import com.example.lojabumi.usuario.tipoConta.Cliente;
 public class Main {
     public static void main(String[] args) {
 
-        // Registrar usuários
         Administrador adm = new Administrador(1, "Carlos", "10/10/1985", "carlos@admin.com", "admin123");
         Cliente cliente1 = new Cliente(101, "João", "01/01/1990", "joao@email.com", "12345");
+
+
 
         UserDatabase.adicionarUsuario(adm);
         UserDatabase.adicionarUsuario(cliente1);

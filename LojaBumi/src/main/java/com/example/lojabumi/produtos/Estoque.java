@@ -123,4 +123,8 @@ public class Estoque {
     public static Map<Integer, Produto> getProdutos() {
         return produtos;
     }
+
+    public static int getQuantidade(int idProduto) {
+        return estoque.getOrDefault(idProduto, 0);
+    }
 }

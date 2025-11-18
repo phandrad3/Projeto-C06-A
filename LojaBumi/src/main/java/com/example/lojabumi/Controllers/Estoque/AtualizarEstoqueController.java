@@ -68,7 +68,13 @@ public class AtualizarEstoqueController {
         if (!precoField.getText().trim().isEmpty()) {
             try {
                 double novoPreco = Double.parseDouble(precoField.getText().trim());
-                produtoEncontrado.setPreco(novoPreco);
+
+                boolean precoAtualizado = Estoque.atualizarValor(produtoEncontrado, novoPreco, usuario);
+                if (!precoAtualizado) {
+                    mostrarErro("Erro ao atualizar o preço. Verifique os dados.");
+                    return;
+                }
+
             } catch (Exception e) {
                 mostrarErro("Preço inválido.");
                 return;
@@ -97,6 +103,7 @@ public class AtualizarEstoqueController {
 
         mostrarInfo("Estoque atualizado com sucesso!");
     }
+
 
 
 

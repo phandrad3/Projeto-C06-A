@@ -39,7 +39,7 @@
         <VBox spacing="10.0">
             <children>
                 <Label style="-fx-font-size: 25;" text="Tipo" textFill="WHITE" />
-                <ChoiceBox fx:id="tipoChoiceBox" prefWidth="400.0" style="-fx-background-color: #334155; -fx-text-fill: #000000; -fx-font-size: 20;" />
+                <ChoiceBox fx:id="tipoChoiceBox" prefWidth="400.0" style="-fx-background-color: #334155; -fx-text-fill: WHITE; -fx-font-size: 20;" />
             </children>
         </VBox>
 
