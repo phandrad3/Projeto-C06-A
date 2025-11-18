@@ -50,7 +50,23 @@ public class Cliente extends Usuario {
     }
 
     @Override
-    public boolean isAdministrador() {
+    public boolean alterarEstoque() {
         return false;
     }
+
+    @Override
+    public boolean alterarPreco() {
+        return false;
+    }
+
+    @Override
+    public boolean addEstoque() {
+        return false;
+    }
+
+    @Override
+    public boolean removerProduto() {
+        return false;
+    }
+
 }

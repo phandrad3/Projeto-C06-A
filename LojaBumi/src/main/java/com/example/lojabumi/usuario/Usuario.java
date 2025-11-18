@@ -1,6 +1,8 @@
 package com.example.lojabumi.usuario;
 
-public abstract class Usuario {
+import com.example.lojabumi.usuario.Permissao;
+
+public abstract class Usuario implements Permissao{
     protected int idUsuario;
     protected String nome;
     protected String dataNasc;
@@ -33,15 +35,5 @@ public abstract class Usuario {
 
     public String getSenha() {
         return senha;
-    }
-
-    public abstract boolean isAdministrador();
-
-    public boolean liberarAcesso() {
-        if (!isAdministrador()) {
-            System.err.println("Ta brokiado");
-            return false;
-        }
-        return true;
     }
 }
