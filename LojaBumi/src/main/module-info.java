@@ -11,5 +11,7 @@ module com.example.lojabumi {
     requires eu.hansolo.tilesfx;
 
     opens com.example.lojabumi to javafx.fxml;
+    opens view to javafx.fxml;
+
     exports com.example.lojabumi;
 }

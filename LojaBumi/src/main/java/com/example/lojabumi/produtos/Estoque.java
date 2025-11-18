@@ -59,6 +59,24 @@ public class Estoque {
         return true;
     }
 
+    public static boolean atualizarValor(Produto produto, double novoValor, Usuario usuario) {
+        if (!usuario.liberarAcesso()) return false;
+
+        if (produto == null || novoValor <= 0) {
+            System.err.println("Erro: Produto inválido ou valor inválido.");
+            return false;
+        }
+
+        int idProduto = produto.getId();
+
+        produto.setPreco(novoValor);
+
+        System.out.println("Valor do produto '" + produto.getNome() + "' (ID: " + idProduto +
+                ") atualizado para R$ " + novoValor);
+
+        return true;
+    }
+
     public static int getEstoque(Produto produto) {
         if (produto == null) return 0;
         return estoque.getOrDefault(produto.getId(), 0);
@@ -118,5 +136,13 @@ public class Estoque {
             }
         }
         System.out.println("--------------------------\n");
+    }
+
+    public static Map<Integer, Produto> getProdutos() {
+        return produtos;
+    }
+
+    public static int getQuantidade(int idProduto) {
+        return estoque.getOrDefault(idProduto, 0);
     }
 }
