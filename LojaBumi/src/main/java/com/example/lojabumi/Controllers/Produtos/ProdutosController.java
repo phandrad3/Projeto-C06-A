@@ -98,7 +98,7 @@ public class ProdutosController {
 
         Usuario usuario = UserDatabase.getUsuarioLogado();
 
-        if (!usuario.liberarAcesso()) {
+        if (!usuario.alterarEstoque()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Acesso Negado");
             alert.setHeaderText(null);

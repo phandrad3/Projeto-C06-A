@@ -64,7 +64,7 @@ public class RemoverProdutoController {
 
         produtoEncontrado = encontrado;
 
-        if (usuario == null || !usuario.liberarAcesso()) {
+        if (usuario == null || !usuario.removerProduto()) {
             mostrarErro("Acesso negado. Apenas administradores podem remover produtos.");
             return;
         }

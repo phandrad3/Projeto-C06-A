@@ -60,7 +60,7 @@ public class AtualizarEstoqueController {
             return;
         }
 
-        if (usuario == null || !usuario.liberarAcesso()) {
+        if (usuario == null || !usuario.alterarEstoque()) {
             mostrarErro("Acesso negado. Apenas administradores podem atualizar o estoque.");
             return;
         }

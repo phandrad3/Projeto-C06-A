@@ -64,7 +64,7 @@ public class RemoverEstoqueController {
             return;
         }
 
-        if (usuario == null || !usuario.liberarAcesso()) {
+        if (usuario == null || !usuario.alterarEstoque()) {
             mostrarErro("Apenas administradores podem remover estoque.");
             return;
         }

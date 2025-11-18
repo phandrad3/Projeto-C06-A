@@ -60,7 +60,7 @@ public class Estoque {
     }
 
     public static boolean atualizarValor(Produto produto, double novoValor, Usuario usuario) {
-        if (!usuario.liberarAcesso()) return false;
+        if (!usuario.alterarPreco()) return false;
 
         if (produto == null || novoValor <= 0) {
             System.err.println("Erro: Produto inválido ou valor inválido.");
