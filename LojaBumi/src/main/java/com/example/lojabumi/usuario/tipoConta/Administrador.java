@@ -9,7 +9,22 @@ public class Administrador extends Usuario {
     }
 
     @Override
-    public boolean isAdministrador() {
+    public boolean alterarEstoque() {
+        return true;
+    }
+
+    @Override
+    public boolean alterarPreco() {
+        return true;
+    }
+
+    @Override
+    public boolean addEstoque() {
+        return true;
+    }
+
+    @Override
+    public boolean removerProduto() {
         return true;
     }
 }
