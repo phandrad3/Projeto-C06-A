@@ -3,13 +3,16 @@ package com.example.lojabumi.utilitarios;
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Permissao;
-import com.example.lojabumi.usuario.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class Compra implements Permissao {
+
+    private static final Compra compra = new Compra();
+
+    private Compra() {}
 
     @Override
     public boolean alterarEstoque() {
@@ -72,8 +75,6 @@ public class Compra implements Permissao {
             System.out.println("-------------------------------------\n");
             return false;
         }
-
-        Compra compra = new Compra();
 
         for (Map.Entry<Produto, Integer> entry : carrinho.entrySet()) {
             Produto produto = entry.getKey();
