@@ -5,21 +5,20 @@ import com.example.lojabumi.produtos.*;
 import com.example.lojabumi.produtos.tipo.*;
 import com.example.lojabumi.usuario.Usuario;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+
+
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 
-import java.io.IOException;
+
+
 
 import static com.example.lojabumi.Controllers.MudarTela.mudarTela;
 
 public class AddProdutoController {
 
-    private Usuario usuario;
 
     @FXML
     private TextField nomeField;
@@ -95,7 +94,6 @@ public class AddProdutoController {
             default:
                 produto = new NaoPereciveis(nome, preco);
         }
-
         boolean sucesso = Estoque.adicionarEstoque(produto, quantidade, usuario);
 
         if (sucesso) {

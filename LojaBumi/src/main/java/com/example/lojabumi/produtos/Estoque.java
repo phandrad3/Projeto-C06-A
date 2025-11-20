@@ -100,19 +100,6 @@ public class Estoque implements Runnable {
         return true;
     }
 
-    public static boolean atualizarValor(Produto produto, double novoValor, Permissao usuario) {
-        if (!usuario.alterarPreco()) return false;
-
-        if (produto == null || novoValor <= 0) {
-            System.err.println("Erro: Produto inválido ou valor inválido.");
-            return false;
-        }
-
-        produto.setPreco(novoValor);
-        System.out.println("Preço do produto '" + produto.getNome() + "' alterado para R$ " + novoValor);
-
-        return true;
-    }
 
     public static boolean atualizarValor(Produto produto, double novoValor, Usuario usuario) {
         if (!usuario.alterarPreco()) return false;

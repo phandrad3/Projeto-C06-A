@@ -3,6 +3,7 @@ package com.example.lojabumi.usuario.tipoConta;
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Usuario;
+import javafx.scene.control.Alert;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,10 +23,15 @@ public class Cliente extends Usuario {
         int quantidadeCarrinho = carrinho.getOrDefault(produto, 0);
 
         if (quantidadeCarrinho >= Estoque.getEstoque(produto)) {
-            System.out.println("Erro: Estoque insuficiente para o produto '" + produto.getNome() + "'.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText(null);
+            alert.setContentText("Não temos mais estoque desse produto!");
+            alert.showAndWait();
+            System.out.println("Estoque insuficiente");
             return;
         }
-
+        new Alert(Alert.AlertType.INFORMATION, "Produto adicionado no carrinho!").showAndWait();
         carrinho.put(produto, quantidadeCarrinho + 1);
         System.out.println("Produto '" + produto.getNome() + "' adicionado ao carrinho.");
     }
@@ -68,5 +74,6 @@ public class Cliente extends Usuario {
     public boolean removerProduto() {
         return false;
     }
+
 
 }
