@@ -9,7 +9,6 @@ public class UserDatabase {
 
     private static ArrayList<Object> usuarios = new ArrayList<>();
 
-
     public static void adicionarUsuario(Object usuario) {
         usuarios.add(usuario);
     }
@@ -37,6 +36,15 @@ public class UserDatabase {
         return null;
     }
 
+    /**
+     * Carrega todos os usuários do banco de dados para a lista estática
+     */
+    public static void carregarUsuariosDoBanco() {
+        ArrayList<Usuario> usuariosDoBanco = Usuario.buscarTodosUsuarios();
+        for (Usuario usuario : usuariosDoBanco) {
+            usuarios.add(usuario);
+        }
+    }
 
     private static Usuario usuarioLogado;
 

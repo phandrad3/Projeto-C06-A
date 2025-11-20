@@ -11,12 +11,15 @@ import java.util.Map;
 public class Cliente extends Usuario {
     private Map<Produto, Integer> carrinho = new HashMap<>();
 
-    public Cliente(int idUsuario, String nome, String dataNasc, String email, String senha) {
+    public Cliente(int idUsuario, String nome, String dataNasc, String email, String senha, boolean inserirNoBanco) {
         super(idUsuario, nome, dataNasc, email, senha);
-        String tableName = "usuario";
-        String jsonInputString = "{\"idUsuario\": \"%d\", \"nomeUsuario\": \"%s\",\"dataNasc\": \"%s\",\"email\": \"%s\",\"senha\": \"%s\",\"tipoUsuario\": \"%s\"}";
-        jsonInputString = String.format(jsonInputString, idUsuario, nome, dataNasc, email, senha, "Cliente");
-        SupabaseConfig.testInsertData(tableName, jsonInputString);
+        if (inserirNoBanco) {
+            String tableName = "usuario";
+            String dataISO = Usuario.converterDataParaISO(dataNasc);
+            String jsonInputString = "{\"idUsuario\": \"%d\", \"nomeUsuario\": \"%s\",\"dataNasc\": \"%s\",\"email\": \"%s\",\"senha\": \"%s\",\"tipoUsuario\": \"%s\"}";
+            jsonInputString = String.format(jsonInputString, idUsuario, nome, dataISO, email, senha, "Cliente");
+            SupabaseConfig.testInsertData(tableName, jsonInputString);
+        }
     }
 
     public Map<Produto, Integer> getCarrinho() {
@@ -73,5 +76,4 @@ public class Cliente extends Usuario {
     public boolean removerProduto() {
         return false;
     }
-
 }
