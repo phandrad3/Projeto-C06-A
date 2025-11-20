@@ -6,10 +6,65 @@ import com.example.lojabumi.usuario.Usuario;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Estoque {
-
+public class Estoque implements Runnable {
     private static Map<Integer, Integer> estoque = new HashMap<>();
     private static Map<Integer, Produto> produtos = new HashMap<>();
+
+    // Atributos para o monitoramento
+    private static final int LIMITE_CRITICO = 5;
+    private static final int INTERVALO_VERIFICACAO = 60000; // 60 segundos
+    private static Thread threadMonitor;
+    private static boolean executando = false;
+
+    public static void iniciarMonitoramento() {
+        if (threadMonitor == null || !threadMonitor.isAlive()) { // verifica se uma thread está em execução
+            executando = true;
+            threadMonitor = new Thread(new Estoque());
+            threadMonitor.setDaemon(true); // quando o programa principal terminar, a thread será automaticamente interrompida
+            threadMonitor.start();
+        }
+    }
+
+    @Override
+    public void run() {
+        while (executando) {
+            try {
+                verificarEstoqueCritico();
+                Thread.sleep(INTERVALO_VERIFICACAO); // pausa a execução da thread atual por um número especificado
+            } catch (InterruptedException e) {
+                System.out.println("Monitor de estoque interrompido.");
+                executando = false;
+            }
+        }
+    }
+
+    private static void verificarEstoqueCritico() {
+        boolean temEstoqueCritico = false;
+
+        for (Map.Entry<Integer, Integer> entry : estoque.entrySet()) {
+            int idProduto = entry.getKey();
+            int quantidade = entry.getValue();
+            Produto produto = produtos.get(idProduto);
+
+            if (produto != null && quantidade < LIMITE_CRITICO) {
+                temEstoqueCritico = true;
+                System.out.println("ALERTA: Produto '" + produto.getNome() +
+                        "' (ID: " + idProduto + ") com estoque baixo: " + quantidade + " unidades.");
+            }
+        }
+
+        if (!temEstoqueCritico) {
+            System.out.println("Todos os produtos com estoque adequado.");
+        }
+    }
+
+    public static void pararMonitoramento() {
+        executando = false;
+        if (threadMonitor != null) {
+            threadMonitor.interrupt();
+            System.out.println("Monitor de estoque finalizado.");
+        }
+    }
 
     public static boolean adicionarEstoque(Produto produto, int quantidade, Permissao usuario) {
         if (!usuario.addEstoque()) return false;

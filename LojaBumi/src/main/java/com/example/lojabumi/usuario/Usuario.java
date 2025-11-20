@@ -33,7 +33,5 @@ public abstract class Usuario implements Permissao{
         return email;
     }
 
-    public String getSenha() {
-        return senha;
-    }
+    public String getSenha(){ return senha;}
 }
