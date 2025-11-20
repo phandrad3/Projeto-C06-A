@@ -1,6 +1,7 @@
 package com.example.lojabumi;
 
 
+import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.tipo.Eletronico;
 import com.example.lojabumi.usuario.tipoConta.Administrador;
 import com.example.lojabumi.usuario.tipoConta.Cliente;
