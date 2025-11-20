@@ -1,6 +1,7 @@
 package com.example.lojabumi.Controllers.Estoque;
 
 import com.example.lojabumi.UserDatabase;
+import com.example.lojabumi.config.SupabaseConfig;
 import com.example.lojabumi.produtos.*;
 import com.example.lojabumi.produtos.tipo.*;
 import com.example.lojabumi.usuario.Usuario;
@@ -14,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import static com.example.lojabumi.Controllers.MudarTela.mudarTela;
 
@@ -100,6 +102,18 @@ public class AddProdutoController {
 
         if (sucesso) {
             new Alert(Alert.AlertType.INFORMATION, "Produto adicionado com sucesso!").showAndWait();
+            String tableName = "produtos";
+            String precoFormatado = String.format(Locale.US, "%.2f", preco);
+
+            String jsonInputString = String.format(
+                    Locale.US,
+                    "{\"idProduto\": %d, \"nome\": \"%s\", \"quantidade\": %d, \"preco\": %s, \"tipoProduto\": \"%s\"}",
+                    produto.getId(), produto.getNome(), quantidade, precoFormatado, tipo
+            );
+
+            System.out.println("DEBUG JSON: " + jsonInputString);
+
+            SupabaseConfig.testInsertData(tableName, jsonInputString);
 
             nomeField.clear();
             precoField.clear();
