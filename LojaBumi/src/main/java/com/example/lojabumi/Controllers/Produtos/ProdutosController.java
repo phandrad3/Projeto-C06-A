@@ -4,19 +4,14 @@ import com.example.lojabumi.UserDatabase;
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Usuario;
+import com.example.lojabumi.usuario.tipoConta.Cliente;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.util.Map;
-
 import static com.example.lojabumi.Controllers.MudarTela.mudarTela;
 
 public class ProdutosController {
@@ -33,7 +28,6 @@ public class ProdutosController {
     @FXML
     private GridPane gridProdutos;
 
-    private Usuario usuario;
 
 
     private void carregarProdutos() {
@@ -69,7 +63,7 @@ public class ProdutosController {
             gridProdutos.add(box, col, row);
 
             col++;
-            if (col > 2) { // 3 colunas
+            if (col > 2) {
                 col = 0;
                 row++;
             }
@@ -77,7 +71,23 @@ public class ProdutosController {
     }
 
     private void adicionarAoCarrinho(int idProduto) {
-        System.out.println("Produto " + idProduto + " adicionado ao carrinho!");
+        Produto produto = Estoque.getProdutos().get(idProduto);
+        Usuario usuarioLogado = UserDatabase.getUsuarioLogado();
+        if (produto == null) {
+            System.out.println("Erro: produto não encontrado!");
+            return;
+        }
+
+        if (usuarioLogado instanceof Cliente) {
+            Cliente clienteLogado = (Cliente) usuarioLogado;
+            clienteLogado.addProduto(produto);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText(null);
+            alert.setContentText("Apenas clientes podem adicionar produtos ao carrinho!");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -90,7 +100,6 @@ public class ProdutosController {
                     mudarTela(btncarrinho, "/view/Carrinho.fxml");
                 }
         );
-
         carregarProdutos();
     }
 

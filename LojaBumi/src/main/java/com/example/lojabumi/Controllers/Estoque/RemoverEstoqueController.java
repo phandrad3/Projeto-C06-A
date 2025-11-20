@@ -24,9 +24,6 @@ public class RemoverEstoqueController {
     private Label quantidadeAtualLabel;
 
     @FXML
-    private Button btnRemover;
-
-    @FXML
     private Button btnVoltar;
 
     private Usuario usuario = UserDatabase.getUsuarioLogado();
@@ -92,6 +89,8 @@ public class RemoverEstoqueController {
         mostrarInfo("Removido com sucesso!");
 
         quantidadeAtualLabel.setText("Quantidade Atual: " + Estoque.getEstoque(produto));
+        buscarField.clear();
+        quantidadeRemoverField.clear();
     }
 
 

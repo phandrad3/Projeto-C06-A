@@ -16,7 +16,7 @@
       fx:controller="com.example.lojabumi.Controllers.Produtos.ProdutosController">
 
     <TitledPane animated="false" collapsible="false"
-                style="-fx-background-color: #1E293B; -fx-text-fill: white;" text="Menu">
+                style="-fx-background-color: #1E293B; -fx-text-fill: black;" text="Menu">
         <content>
             <AnchorPane prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #1E293B;">
                 <children>

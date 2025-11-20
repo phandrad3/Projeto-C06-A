@@ -2,7 +2,7 @@ package com.example.lojabumi.Controllers.Estoque;
 
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
-import com.example.lojabumi.usuario.Usuario;
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -18,10 +18,8 @@ public class EstoqueController {
     public Button btnRemoverProduto;
     @FXML
     private Button Voltar;
-
     @FXML
     private TableView<Produto> tableEstoque;
-
     @FXML
     private TableColumn<Produto, Integer> coliD;
     @FXML
@@ -32,10 +30,8 @@ public class EstoqueController {
     private TableColumn<Produto, Integer> colQuantidade;
     @FXML
     private TableColumn<Produto, String> colTipo;
-
     @FXML
     private Button btnAtualizar;
-
     @FXML
     private Button btnAdicionar;
 
@@ -44,7 +40,6 @@ public class EstoqueController {
     public void initialize() {
         tableEstoque.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        // Configura as colunas
         coliD.setCellValueFactory(cellData ->
                 new SimpleIntegerProperty(cellData.getValue().getId()).asObject()
         );

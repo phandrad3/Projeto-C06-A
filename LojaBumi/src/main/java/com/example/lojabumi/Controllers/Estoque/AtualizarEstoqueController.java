@@ -23,9 +23,6 @@ public class AtualizarEstoqueController {
     private TextField quantidadeField;
 
     @FXML
-    private Button btnAtualizar;
-
-    @FXML
     private Button btnVoltar;
 
     private Usuario usuario = UserDatabase.getUsuarioLogado();
@@ -102,6 +99,9 @@ public class AtualizarEstoqueController {
         }
 
         mostrarInfo("Estoque atualizado com sucesso!");
+        buscarField.clear();
+        precoField.clear();
+        quantidadeField.clear();
     }
 
 
