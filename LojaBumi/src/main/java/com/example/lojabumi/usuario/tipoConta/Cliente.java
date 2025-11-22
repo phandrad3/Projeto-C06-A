@@ -19,16 +19,14 @@ public class Cliente extends Usuario {
         try {
             return new HashMap<>(carrinho); // Retorna uma cópia para evitar modificações externas
         } catch (Exception e) {
-            System.err.println("Erro ao obter carrinho: " + e.getMessage());
-            return new HashMap<>(); // Retorna mapa vazio em caso de erro
+            throw new RuntimeException("Erro ao obter carrinho", e);
         }
     }
 
     public void addProduto(Produto produto) {
         try {
             if (produto == null) {
-                System.err.println("Erro: Produto não pode ser nulo");
-                return;
+                throw new IllegalArgumentException("Produto não pode ser nulo");
             }
 
             int quantidadeCarrinho = carrinho.getOrDefault(produto, 0);
@@ -42,7 +40,7 @@ public class Cliente extends Usuario {
                     alert.setContentText("Não temos mais estoque desse produto!");
                     alert.showAndWait();
                 } catch (Exception e) {
-                    System.err.println("Erro ao exibir alerta de estoque insuficiente: " + e.getMessage());
+                    throw new RuntimeException("Erro ao exibir alerta de estoque insuficiente", e);
                 }
                 System.out.println("Estoque insuficiente");
                 return;
@@ -58,12 +56,12 @@ public class Cliente extends Usuario {
                 alert.setContentText("Produto adicionado no carrinho!");
                 alert.showAndWait();
             } catch (Exception e) {
-                System.err.println("Erro ao exibir alerta de sucesso: " + e.getMessage());
+                throw new RuntimeException("Erro ao exibir alerta de sucesso", e);
             }
-        } catch (NullPointerException e) {
-            System.err.println("Erro de referência nula ao adicionar produto: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            throw e; // Repassa exceções já tratadas
         } catch (Exception e) {
-            System.err.println("Erro inesperado ao adicionar produto: " + e.getMessage());
+            throw new RuntimeException("Erro inesperado ao adicionar produto", e);
         }
     }
 
@@ -82,9 +80,7 @@ public class Cliente extends Usuario {
                         total += subtotal;
                         System.out.println(produto.getNome() + " | Quantidade: " + quantidade + " | Subtotal: R$ " + String.format("%.2f", subtotal));
                     } catch (NullPointerException e) {
-                        System.err.println("Erro ao processar item do carrinho: " + e.getMessage());
-                    } catch (Exception e) {
-                        System.err.println("Erro inesperado ao processar item do carrinho: " + e.getMessage());
+                        throw new IllegalStateException("Erro ao processar item do carrinho", e);
                     }
                 }
                 System.out.println("-------------------------------------------------");
@@ -92,7 +88,7 @@ public class Cliente extends Usuario {
             }
             System.out.println("--------------------\n");
         } catch (Exception e) {
-            System.err.println("Erro ao exibir carrinho: " + e.getMessage());
+            throw new RuntimeException("Erro ao exibir carrinho", e);
         }
     }
 
