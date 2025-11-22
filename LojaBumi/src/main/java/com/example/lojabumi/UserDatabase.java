@@ -15,7 +15,6 @@ public class UserDatabase {
 
     public static Object autenticar(String email, String senha) {
         for (Object u : usuarios) {
-
             if (u instanceof Cliente) {
                 Cliente c = (Cliente) u;
                 if (c.getEmail().equals(email) && c.getSenha().equals(senha)) {
@@ -36,9 +35,6 @@ public class UserDatabase {
         return null;
     }
 
-    /**
-     * Carrega todos os usuários do banco de dados para a lista estática
-     */
     public static void carregarUsuariosDoBanco() {
         ArrayList<Usuario> usuariosDoBanco = Usuario.buscarTodosUsuarios();
         for (Usuario usuario : usuariosDoBanco) {

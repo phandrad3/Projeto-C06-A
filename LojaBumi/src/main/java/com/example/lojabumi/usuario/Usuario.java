@@ -44,12 +44,6 @@ public abstract class Usuario implements Permissao {
         return senha;
     }
 
-    /**
-     * Converte uma data no formato brasileiro (dd/MM/yyyy) para o formato ISO (yyyy-MM-dd)
-     * @param dataBrasil Data no formato dd/MM/yyyy
-     * @return Data no formato yyyy-MM-dd
-     * @throws IllegalArgumentException Se o formato for inválido
-     */
     public static String converterDataParaISO(String dataBrasil) {
         String[] partes = dataBrasil.split("/");
         if (partes.length != 3) {
@@ -68,28 +62,12 @@ public abstract class Usuario implements Permissao {
         }
     }
 
-    /**
-     * Converte uma data no formato ISO (yyyy-MM-dd) para o formato brasileiro (dd/MM/yyyy)
-     * @param dataISO Data no formato yyyy-MM-dd
-     * @return Data no formato dd/MM/yyyy
-     */
     public static String converterDataParaBrasil(String dataISO) {
         String[] partes = dataISO.split("-");
         if (partes.length != 3) return dataISO;
         return partes[2] + "/" + partes[1] + "/" + partes[0];
     }
 
-    /**
-     * Cadastra um novo usuário no sistema (Cliente ou Administrador)
-     * @param idUsuario ID do usuário
-     * @param nome Nome do usuário
-     * @param dataNasc Data de nascimento no formato dd/MM/yyyy
-     * @param email Email do usuário
-     * @param senha Senha do usuário
-     * @param tipoUsuario Tipo do usuário ("Cliente" ou "Administrador")
-     * @return Instância do usuário criado
-     * @throws IllegalArgumentException Se o tipo de usuário for inválido
-     */
     public static Usuario cadastrarUsuario(int idUsuario, String nome, String dataNasc,
                                            String email, String senha, String tipoUsuario) {
         Usuario usuario;
@@ -101,16 +79,11 @@ public abstract class Usuario implements Permissao {
             throw new IllegalArgumentException("Tipo de usuário inválido: " + tipoUsuario);
         }
 
-        // Adiciona o usuário à lista estática do UserDatabase
         UserDatabase.adicionarUsuario(usuario);
 
         return usuario;
     }
 
-    /**
-     * Busca todos os usuários no banco de dados
-     * @return Lista de usuários (Cliente e Administrador)
-     */
     public static ArrayList<Usuario> buscarTodosUsuarios() {
         String tableName = "usuario";
         String resposta = SupabaseConfig.testSelectAllData(tableName);
@@ -134,7 +107,6 @@ public abstract class Usuario implements Permissao {
                 String senha = jsonUsuario.getString("senha");
                 String tipoUsuario = jsonUsuario.getString("tipoUsuario");
 
-                // Converte a data de ISO para o formato brasileiro
                 String dataBrasil = converterDataParaBrasil(dataNasc);
 
                 Usuario usuario;
@@ -143,7 +115,7 @@ public abstract class Usuario implements Permissao {
                 } else if (tipoUsuario.equals("Administrador")) {
                     usuario = new Administrador(idUsuario, nome, dataBrasil, email, senha, false);
                 } else {
-                    continue; // Pula se o tipo for inválido
+                    continue;
                 }
 
                 usuarios.add(usuario);

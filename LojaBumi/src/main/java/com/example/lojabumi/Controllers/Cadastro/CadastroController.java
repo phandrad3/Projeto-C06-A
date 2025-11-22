@@ -29,14 +29,11 @@ public class CadastroController {
 
         if (usuario != null) {
             if (usuario instanceof Administrador) {
-                System.out.println("Administrador logado: " + usuario.getNome());
                 mudarTela(btnEntrar, "/view/Produtos.fxml");
             } else {
-                System.out.println("Cliente logado: " + usuario.getNome());
                 mudarTela(btnEntrar, "/view/Produtos.fxml");
             }
         } else {
-            System.out.println("Falha na autenticação");
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Login Inválido");
             alert.setHeaderText(null);

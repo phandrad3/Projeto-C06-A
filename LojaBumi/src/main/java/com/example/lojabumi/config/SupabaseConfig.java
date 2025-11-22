@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.io.OutputStreamWriter;
 
@@ -12,11 +11,6 @@ public class SupabaseConfig {
     private static final String SUPABASE_URL = "https://cfwsneatmmtsjpormtaa.supabase.co";
     private static final String SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd3NuZWF0bW10c2pwb3JtdGFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIyNTk1MTcsImV4cCI6MjA3NzgzNTUxN30.M77raYr4ZdmcSfmgeF3lJe1rb_QPD0gf9AtSXiJYUyc";
 
-    /**
-     * Insere dados no Supabase
-     * @param tableName Nome da tabela
-     * @param jsonInputString Dados em formato JSON
-     */
     public static void testInsertData(String tableName, String jsonInputString) {
         try {
             URL url = new URL(SUPABASE_URL + "/rest/v1/" + tableName);
@@ -42,21 +36,14 @@ public class SupabaseConfig {
                     response.append(inputLine);
                 }
                 in.close();
-                System.out.println("❌ Falha ao inserir dados. Código: " + responseCode);
+                System.out.println("Falha ao inserir dados. Código: " + responseCode);
                 System.out.println("Resposta: " + response.toString());
-            } else {
-                System.out.println("✅ Dados inseridos com sucesso!");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * Busca todos os dados de uma tabela no Supabase
-     * @param tableName Nome da tabela
-     * @return Resposta em formato JSON
-     */
     public static String testSelectAllData(String tableName) {
         try {
             String urlStr = SUPABASE_URL + "/rest/v1/" + tableName + "?select=*";
@@ -68,7 +55,6 @@ public class SupabaseConfig {
             conn.setRequestProperty("Authorization", "Bearer " + SUPABASE_KEY);
             conn.setRequestProperty("Content-Type", "application/json");
 
-            // Ler a resposta
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String inputLine;
             StringBuilder response = new StringBuilder();
