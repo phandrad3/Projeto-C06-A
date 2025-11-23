@@ -1,11 +1,19 @@
 package com.example.lojabumi.usuario.tipoConta;
 
+import com.example.lojabumi.config.SupabaseConfig;
 import com.example.lojabumi.usuario.Usuario;
 
 public class Administrador extends Usuario {
 
-    public Administrador(int idUsuario, String nome, String dataNasc, String email, String senha) {
+    public Administrador(int idUsuario, String nome, String dataNasc, String email, String senha, boolean inserirNoBanco) {
         super(idUsuario, nome, dataNasc, email, senha);
+        if (inserirNoBanco) {
+            String tableName = "usuario";
+            String dataISO = Usuario.converterDataParaISO(dataNasc);
+            String jsonInputString = "{\"idUsuario\": \"%d\", \"nomeUsuario\": \"%s\",\"dataNasc\": \"%s\",\"email\": \"%s\",\"senha\": \"%s\",\"tipoUsuario\": \"%s\"}";
+            jsonInputString = String.format(jsonInputString, idUsuario, nome, dataISO, email, senha, "Administrador");
+            SupabaseConfig.testInsertData(tableName, jsonInputString);
+        }
     }
 
     @Override

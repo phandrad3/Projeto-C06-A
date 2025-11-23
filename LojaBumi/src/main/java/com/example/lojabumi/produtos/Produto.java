@@ -1,5 +1,6 @@
 package com.example.lojabumi.produtos;
 
+import com.example.lojabumi.config.SupabaseConfig;
 import com.example.lojabumi.usuario.Usuario;
 
 public abstract class Produto {
@@ -12,6 +13,7 @@ public abstract class Produto {
         this.id = nextId++;
         this.nome = nome;
         this.preco = preco;
+
     }
 
     public int getId() {

@@ -1,6 +1,7 @@
 package com.example.lojabumi.Controllers.Cadastro;
 
 import com.example.lojabumi.UserDatabase;
+import com.example.lojabumi.usuario.Usuario;
 import com.example.lojabumi.usuario.tipoConta.Administrador;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -24,24 +25,19 @@ public class CadastroController {
         String email = emailField.getText();
         String senha = senhaField.getText();
 
-        Object usuario = UserDatabase.autenticar(email, senha);
+        Usuario usuario = (Usuario) UserDatabase.autenticar(email, senha);
 
         if (usuario != null) {
-
             if (usuario instanceof Administrador) {
-                System.out.println("Entrou o brabao");
-                mudarTela(btnEntrar,"/view/Produtos.fxml");
+                mudarTela(btnEntrar, "/view/Produtos.fxml");
             } else {
-                System.out.println("entrou clientela porra");
-                mudarTela(btnEntrar,"/view/Produtos.fxml");
+                mudarTela(btnEntrar, "/view/Produtos.fxml");
             }
-
         } else {
-            System.out.println("Nao tem cadastro disso ai");
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Login Inválido");
             alert.setHeaderText(null);
-            alert.setContentText("Não existe cadastro com esse email e senha.");
+            alert.setContentText("Email ou senha incorretos.");
             alert.showAndWait();
         }
     }

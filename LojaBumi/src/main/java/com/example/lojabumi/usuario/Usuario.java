@@ -1,8 +1,15 @@
 package com.example.lojabumi.usuario;
 
+import com.example.lojabumi.UserDatabase;
 import com.example.lojabumi.usuario.Permissao;
+import com.example.lojabumi.usuario.tipoConta.Cliente;
+import com.example.lojabumi.usuario.tipoConta.Administrador;
+import com.example.lojabumi.config.SupabaseConfig;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.util.ArrayList;
 
-public abstract class Usuario implements Permissao{
+public abstract class Usuario implements Permissao {
     protected int idUsuario;
     protected String nome;
     protected String dataNasc;
@@ -33,5 +40,90 @@ public abstract class Usuario implements Permissao{
         return email;
     }
 
-    public String getSenha(){ return senha;}
+    public String getSenha() {
+        return senha;
+    }
+
+    public static String converterDataParaISO(String dataBrasil) {
+        String[] partes = dataBrasil.split("/");
+        if (partes.length != 3) {
+            throw new IllegalArgumentException("Formato de data inválido. Use dd/MM/yyyy.");
+        }
+        try {
+            int dia = Integer.parseInt(partes[0]);
+            int mes = Integer.parseInt(partes[1]);
+            int ano = Integer.parseInt(partes[2]);
+            if (dia < 1 || dia > 31 || mes < 1 || mes > 12 || ano < 1900 || ano > 2100) {
+                throw new IllegalArgumentException("Data inválida.");
+            }
+            return String.format("%04d-%02d-%02d", ano, mes, dia);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Formato de data inválido. Use dd/MM/yyyy.");
+        }
+    }
+
+    public static String converterDataParaBrasil(String dataISO) {
+        String[] partes = dataISO.split("-");
+        if (partes.length != 3) return dataISO;
+        return partes[2] + "/" + partes[1] + "/" + partes[0];
+    }
+
+    public static Usuario cadastrarUsuario(int idUsuario, String nome, String dataNasc,
+                                           String email, String senha, String tipoUsuario) {
+        Usuario usuario;
+        if (tipoUsuario.equalsIgnoreCase("Cliente")) {
+            usuario = new Cliente(idUsuario, nome, dataNasc, email, senha, true);
+        } else if (tipoUsuario.equalsIgnoreCase("Administrador")) {
+            usuario = new Administrador(idUsuario, nome, dataNasc, email, senha, true);
+        } else {
+            throw new IllegalArgumentException("Tipo de usuário inválido: " + tipoUsuario);
+        }
+
+        UserDatabase.adicionarUsuario(usuario);
+
+        return usuario;
+    }
+
+    public static ArrayList<Usuario> buscarTodosUsuarios() {
+        String tableName = "usuario";
+        String resposta = SupabaseConfig.testSelectAllData(tableName);
+
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+
+        if (resposta == null || resposta.isEmpty() || resposta.equals("[]")) {
+            return usuarios;
+        }
+
+        try {
+            JSONArray jsonArray = new JSONArray(resposta);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonUsuario = jsonArray.getJSONObject(i);
+
+                int idUsuario = jsonUsuario.getInt("idUsuario");
+                String nome = jsonUsuario.getString("nomeUsuario");
+                String dataNasc = jsonUsuario.getString("dataNasc");
+                String email = jsonUsuario.getString("email");
+                String senha = jsonUsuario.getString("senha");
+                String tipoUsuario = jsonUsuario.getString("tipoUsuario");
+
+                String dataBrasil = converterDataParaBrasil(dataNasc);
+
+                Usuario usuario;
+                if (tipoUsuario.equals("Cliente")) {
+                    usuario = new Cliente(idUsuario, nome, dataBrasil, email, senha, false);
+                } else if (tipoUsuario.equals("Administrador")) {
+                    usuario = new Administrador(idUsuario, nome, dataBrasil, email, senha, false);
+                } else {
+                    continue;
+                }
+
+                usuarios.add(usuario);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return usuarios;
+    }
 }

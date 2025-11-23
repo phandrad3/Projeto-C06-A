@@ -9,14 +9,12 @@ public class UserDatabase {
 
     private static ArrayList<Object> usuarios = new ArrayList<>();
 
-
     public static void adicionarUsuario(Object usuario) {
         usuarios.add(usuario);
     }
 
     public static Object autenticar(String email, String senha) {
         for (Object u : usuarios) {
-
             if (u instanceof Cliente) {
                 Cliente c = (Cliente) u;
                 if (c.getEmail().equals(email) && c.getSenha().equals(senha)) {
@@ -37,6 +35,12 @@ public class UserDatabase {
         return null;
     }
 
+    public static void carregarUsuariosDoBanco() {
+        ArrayList<Usuario> usuariosDoBanco = Usuario.buscarTodosUsuarios();
+        for (Usuario usuario : usuariosDoBanco) {
+            usuarios.add(usuario);
+        }
+    }
 
     private static Usuario usuarioLogado;
 
