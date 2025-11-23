@@ -4,10 +4,7 @@ import com.example.lojabumi.config.SupabaseConfig;
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.produtos.tipo.*;
-import com.example.lojabumi.usuario.tipoConta.Administrador;
-import com.example.lojabumi.usuario.tipoConta.Cliente;
 import com.example.lojabumi.usuario.tipoConta.Sistema;
-import org.controlsfx.control.ListActionView;
 
 import java.util.List;
 import java.util.Map;

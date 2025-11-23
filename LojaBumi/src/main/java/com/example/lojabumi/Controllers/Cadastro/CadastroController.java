@@ -1,7 +1,6 @@
 package com.example.lojabumi.Controllers.Cadastro;
 
 import com.example.lojabumi.UserDatabase;
-import com.example.lojabumi.usuario.Usuario;
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.usuario.tipoConta.Administrador;
 import javafx.fxml.FXML;

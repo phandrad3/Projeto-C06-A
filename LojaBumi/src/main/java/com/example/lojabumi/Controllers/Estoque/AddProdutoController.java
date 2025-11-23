@@ -13,7 +13,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 
-import java.io.IOException;
 import java.util.Locale;
 
 import static com.example.lojabumi.Controllers.MudarTela.mudarTela;
@@ -110,7 +109,7 @@ public class AddProdutoController {
 
             System.out.println("DEBUG JSON: " + jsonInputString);
 
-            SupabaseConfig.testInsertData(tableName, jsonInputString);
+            SupabaseConfig.insertData(tableName, jsonInputString);
 
             nomeField.clear();
             precoField.clear();

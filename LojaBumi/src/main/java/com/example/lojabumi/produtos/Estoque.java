@@ -283,38 +283,6 @@ public class Estoque implements Runnable {
         }
     }
 
-    public static void exibirEstoque() {
-        try {
-            System.out.println("\n--- ESTOQUE COMPLETO ---");
-
-            if (estoque.isEmpty()) {
-                System.out.println("O estoque está vazio.");
-            } else {
-                System.out.println("ID | Nome | Preço | Quantidade");
-                System.out.println("--------------------------------");
-
-                for (Map.Entry<Integer, Integer> entry : estoque.entrySet()) {
-                    try {
-                        int id = entry.getKey();
-                        int quantidade = entry.getValue();
-                        Produto produto = produtos.get(id);
-
-                        if (produto != null) {
-                            System.out.println(id + " | " + produto.getNome() + " | R$ " +
-                                    String.format("%.2f", produto.getPreco()) +
-                                    " | " + quantidade);
-                        }
-                    } catch (NullPointerException e) {
-                        throw new IllegalStateException("Erro ao exibir produto", e);
-                    }
-                }
-            }
-            System.out.println("--------------------------\n");
-        } catch (Exception e) {
-            throw new RuntimeException("Erro ao exibir estoque", e);
-        }
-    }
-
     public static Map<Integer, Produto> getProdutos() {
         try {
             return new HashMap<>(produtos); // Retorna uma cópia para evitar modificações externas

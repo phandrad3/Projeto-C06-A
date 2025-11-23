@@ -12,7 +12,7 @@ public class Administrador extends Usuario {
             String dataISO = Usuario.converterDataParaISO(dataNasc);
             String jsonInputString = "{\"idUsuario\": \"%d\", \"nomeUsuario\": \"%s\",\"dataNasc\": \"%s\",\"email\": \"%s\",\"senha\": \"%s\",\"tipoUsuario\": \"%s\"}";
             jsonInputString = String.format(jsonInputString, idUsuario, nome, dataISO, email, senha, "Administrador");
-            SupabaseConfig.testInsertData(tableName, jsonInputString);
+            SupabaseConfig.insertData(tableName, jsonInputString);
         }
     }
 

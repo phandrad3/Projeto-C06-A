@@ -115,7 +115,6 @@ public class ProdutosController {
             alert.showAndWait();
             return;
         }
-        System.out.println("vc podeee hahaha");
         mudarTela(estoque, "/view/Estoque.fxml");
     }
 

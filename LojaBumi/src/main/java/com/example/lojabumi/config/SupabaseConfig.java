@@ -17,7 +17,7 @@ public class SupabaseConfig {
     private static final String SUPABASE_URL = "https://cfwsneatmmtsjpormtaa.supabase.co";
     private static final String SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd3NuZWF0bW10c2pwb3JtdGFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIyNTk1MTcsImV4cCI6MjA3NzgzNTUxN30.M77raYr4ZdmcSfmgeF3lJe1rb_QPD0gf9AtSXiJYUyc";
 
-    public static void testInsertData(String tableName, String jsonInputString) {
+    public static void insertData(String tableName, String jsonInputString) {
         try {
             URL url = new URL(SUPABASE_URL + "/rest/v1/" + tableName);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -50,7 +50,7 @@ public class SupabaseConfig {
         }
     }
 
-    public static String testSelectUserByEmail(String email) {
+    public static String getUserByEmail(String email) {
         try {
             String emailEncoded = URLEncoder.encode(email, StandardCharsets.UTF_8.toString());
             String urlStr = SUPABASE_URL + "/rest/v1/usuario?select=*&email=eq." + emailEncoded;
@@ -141,29 +141,6 @@ public class SupabaseConfig {
     }
 
     /**
-     * Obtém um valor Boolean do Map
-     * @param map O mapa contendo os dados
-     * @param key A chave do valor desejado
-     * @return O valor como Boolean, ou null se não existir ou não for conversível
-     */
-    public static Boolean getBoolean(Map<String, Object> map, String key) {
-        Object value = map.get(key);
-        if (value == null) {
-            return null;
-        }
-        if (value instanceof Boolean) {
-            return (Boolean) value;
-        }
-        String strValue = value.toString().toLowerCase();
-        if (strValue.equals("true")) {
-            return true;
-        } else if (strValue.equals("false")) {
-            return false;
-        }
-        return null;
-    }
-
-    /**
      * Busca dados de uma tabela específica com ordenação e retorna como lista de Map
      * @param tableName Nome da tabela
      * @param orderBy Campo para ordenação (ex: "id")
@@ -213,61 +190,6 @@ public class SupabaseConfig {
             }
         } catch (IOException e) {
             System.err.println("❌ Erro na recuperação de dados: " + e.getMessage());
-            return new ArrayList<>();
-        }
-    }
-
-    /**
-     * Busca dados com filtros e ordenação e retorna como lista de Map
-     * @param tableName Nome da tabela
-     * @param filter Filtro no formato "campo=eq.valor"
-     * @param orderBy Campo para ordenação (ex: "id")
-     * @param ascending Se true, ordena ascendente; se false, descendente
-     * @return Lista de Map, onde cada Map representa um objeto com chaves e valores
-     */
-    public static List<Map<String, Object>> getDataWithFilter(String tableName, String filter, String orderBy, boolean ascending) {
-        try {
-            // Constrói a URL com filtro e ordenação
-            String orderParam = ascending ? "order=" + orderBy + ".asc" : "order=" + orderBy + ".desc";
-            URL endpoint = new URL(SUPABASE_URL + "/rest/v1/" + tableName + "?" + filter + "&" + orderParam);
-
-            HttpURLConnection connection = (HttpURLConnection) endpoint.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("apikey", SUPABASE_KEY);
-            connection.setRequestProperty("Authorization", "Bearer " + SUPABASE_KEY);
-            connection.setRequestProperty("Content-Type", "application/json");
-
-            int responseCode = connection.getResponseCode();
-            if (responseCode == 200) {
-                // Ler resposta
-                StringBuilder response = new StringBuilder();
-                try (BufferedReader br = new BufferedReader(
-                        new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
-                    String responseLine;
-                    while ((responseLine = br.readLine()) != null) {
-                        response.append(responseLine.trim());
-                    }
-                }
-
-                // Processar o JSON array para lista de Map
-                return parseJsonArrayToMaps(response.toString());
-            } else {
-                System.out.println("❌ Falha ao recuperar dados filtrados. Código: " + responseCode);
-
-                // Ler erro
-                try (BufferedReader br = new BufferedReader(
-                        new InputStreamReader(connection.getErrorStream(), StandardCharsets.UTF_8))) {
-                    StringBuilder response = new StringBuilder();
-                    String responseLine;
-                    while ((responseLine = br.readLine()) != null) {
-                        response.append(responseLine.trim());
-                    }
-                    System.out.println("Resposta: " + response.toString());
-                }
-                return new ArrayList<>();
-            }
-        } catch (IOException e) {
-            System.err.println("❌ Erro na recuperação de dados filtrados: " + e.getMessage());
             return new ArrayList<>();
         }
     }

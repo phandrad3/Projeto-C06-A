@@ -1,8 +1,5 @@
 package com.example.lojabumi.produtos;
 
-import com.example.lojabumi.config.SupabaseConfig;
-import com.example.lojabumi.usuario.Usuario;
-
 public abstract class Produto {
     private static int nextId = 1;
     private int id;

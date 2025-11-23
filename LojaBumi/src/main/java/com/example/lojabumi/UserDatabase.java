@@ -9,10 +9,6 @@ public class UserDatabase {
 
     private static ArrayList<Object> usuarios = new ArrayList<>();
 
-    public static void adicionarUsuario(Object usuario) {
-        usuarios.add(usuario);
-    }
-
     public static Object autenticar(String email, String senha) {
         for (Object u : usuarios) {
             if (u instanceof Cliente) {

@@ -19,7 +19,7 @@ public class Cliente extends Usuario {
             String dataISO = Usuario.converterDataParaISO(dataNasc);
             String jsonInputString = "{\"idUsuario\": \"%d\", \"nomeUsuario\": \"%s\",\"dataNasc\": \"%s\",\"email\": \"%s\",\"senha\": \"%s\",\"tipoUsuario\": \"%s\"}";
             jsonInputString = String.format(jsonInputString, idUsuario, nome, dataISO, email, senha, "Cliente");
-            SupabaseConfig.testInsertData(tableName, jsonInputString);
+            SupabaseConfig.insertData(tableName, jsonInputString);
         }
     }
 
@@ -42,25 +42,6 @@ public class Cliente extends Usuario {
         new Alert(Alert.AlertType.INFORMATION, "Produto adicionado no carrinho!").showAndWait();
         carrinho.put(produto, quantidadeCarrinho + 1);
         System.out.println("Produto '" + produto.getNome() + "' adicionado ao carrinho.");
-    }
-
-    public void verCarrinho() {
-        System.out.println("\n--- Meu Carrinho ---");
-        if (carrinho.isEmpty()) {
-            System.out.println("O carrinho está vazio.");
-        } else {
-            double total = 0;
-            for (Map.Entry<Produto, Integer> entry : carrinho.entrySet()) {
-                Produto produto = entry.getKey();
-                int quantidade = entry.getValue();
-                double subtotal = produto.getPreco() * quantidade;
-                total += subtotal;
-                System.out.println(produto.getNome() + " | Quantidade: " + quantidade + " | Subtotal: R$ " + String.format("%.2f", subtotal));
-            }
-            System.out.println("-------------------------------------------------");
-            System.out.println("TOTAL DO CARRINHO: R$ " + String.format("%.2f", total));
-        }
-        System.out.println("--------------------\n");
     }
 
     @Override

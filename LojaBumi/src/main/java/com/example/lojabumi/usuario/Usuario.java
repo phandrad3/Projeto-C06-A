@@ -1,7 +1,5 @@
 package com.example.lojabumi.usuario;
 
-import com.example.lojabumi.UserDatabase;
-import com.example.lojabumi.usuario.Permissao;
 import com.example.lojabumi.usuario.tipoConta.Cliente;
 import com.example.lojabumi.usuario.tipoConta.Administrador;
 import com.example.lojabumi.config.SupabaseConfig;
@@ -23,16 +21,8 @@ public abstract class Usuario implements Permissao {
         this.senha = senha;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
     public String getNome() {
         return nome;
-    }
-
-    public String getDataNasc() {
-        return dataNasc;
     }
 
     public String getEmail() {
@@ -67,24 +57,8 @@ public abstract class Usuario implements Permissao {
         return partes[2] + "/" + partes[1] + "/" + partes[0];
     }
 
-    public static Usuario cadastrarUsuario(int idUsuario, String nome, String dataNasc,
-                                           String email, String senha, String tipoUsuario) {
-        Usuario usuario;
-        if (tipoUsuario.equalsIgnoreCase("Cliente")) {
-            usuario = new Cliente(idUsuario, nome, dataNasc, email, senha, true);
-        } else if (tipoUsuario.equalsIgnoreCase("Administrador")) {
-            usuario = new Administrador(idUsuario, nome, dataNasc, email, senha, true);
-        } else {
-            throw new IllegalArgumentException("Tipo de usuário inválido: " + tipoUsuario);
-        }
-
-        UserDatabase.adicionarUsuario(usuario);
-
-        return usuario;
-    }
-
     public static Usuario buscarUsuarioPorEmail(String email) {
-        String resposta = SupabaseConfig.testSelectUserByEmail(email);
+        String resposta = SupabaseConfig.getUserByEmail(email);
 
         if (resposta == null || resposta.isEmpty() || resposta.equals("[]")) {
             return null;
