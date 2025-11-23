@@ -7,7 +7,6 @@ import com.example.lojabumi.usuario.tipoConta.Administrador;
 import com.example.lojabumi.config.SupabaseConfig;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import java.util.ArrayList;
 
 public abstract class Usuario implements Permissao {
     protected int idUsuario;
@@ -84,46 +83,38 @@ public abstract class Usuario implements Permissao {
         return usuario;
     }
 
-    public static ArrayList<Usuario> buscarTodosUsuarios() {
-        String tableName = "usuario";
-        String resposta = SupabaseConfig.testSelectAllData(tableName);
-
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+    public static Usuario buscarUsuarioPorEmail(String email) {
+        String resposta = SupabaseConfig.testSelectUserByEmail(email);
 
         if (resposta == null || resposta.isEmpty() || resposta.equals("[]")) {
-            return usuarios;
+            return null;
         }
 
         try {
             JSONArray jsonArray = new JSONArray(resposta);
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonUsuario = jsonArray.getJSONObject(i);
+            if (jsonArray.length() > 0) {
+                JSONObject jsonUsuario = jsonArray.getJSONObject(0);
 
                 int idUsuario = jsonUsuario.getInt("idUsuario");
                 String nome = jsonUsuario.getString("nomeUsuario");
                 String dataNasc = jsonUsuario.getString("dataNasc");
-                String email = jsonUsuario.getString("email");
+                String emailBD = jsonUsuario.getString("email");
                 String senha = jsonUsuario.getString("senha");
                 String tipoUsuario = jsonUsuario.getString("tipoUsuario");
 
                 String dataBrasil = converterDataParaBrasil(dataNasc);
 
-                Usuario usuario;
                 if (tipoUsuario.equals("Cliente")) {
-                    usuario = new Cliente(idUsuario, nome, dataBrasil, email, senha, false);
+                    return new Cliente(idUsuario, nome, dataBrasil, emailBD, senha, false);
                 } else if (tipoUsuario.equals("Administrador")) {
-                    usuario = new Administrador(idUsuario, nome, dataBrasil, email, senha, false);
-                } else {
-                    continue;
+                    return new Administrador(idUsuario, nome, dataBrasil, emailBD, senha, false);
                 }
-
-                usuarios.add(usuario);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return usuarios;
+        return null;
     }
 }

@@ -32,14 +32,15 @@ public class UserDatabase {
             }
         }
 
-        return null;
-    }
+        Usuario usuarioBD = Usuario.buscarUsuarioPorEmail(email);
 
-    public static void carregarUsuariosDoBanco() {
-        ArrayList<Usuario> usuariosDoBanco = Usuario.buscarTodosUsuarios();
-        for (Usuario usuario : usuariosDoBanco) {
-            usuarios.add(usuario);
+        if (usuarioBD != null && usuarioBD.getSenha().equals(senha)) {
+            usuarios.add(usuarioBD);
+            usuarioLogado = usuarioBD;
+            return usuarioBD;
         }
+
+        return null;
     }
 
     private static Usuario usuarioLogado;

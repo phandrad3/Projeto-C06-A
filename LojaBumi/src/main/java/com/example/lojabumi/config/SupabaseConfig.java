@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.io.OutputStreamWriter;
 
@@ -44,9 +45,10 @@ public class SupabaseConfig {
         }
     }
 
-    public static String testSelectAllData(String tableName) {
+    public static String testSelectUserByEmail(String email) {
         try {
-            String urlStr = SUPABASE_URL + "/rest/v1/" + tableName + "?select=*";
+            String emailEncoded = URLEncoder.encode(email, StandardCharsets.UTF_8.toString());
+            String urlStr = SUPABASE_URL + "/rest/v1/usuario?select=*&email=eq." + emailEncoded;
 
             URL url = new URL(urlStr);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
