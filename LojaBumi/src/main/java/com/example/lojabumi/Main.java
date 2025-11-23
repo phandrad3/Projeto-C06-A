@@ -17,9 +17,6 @@ public class Main {
 
         Sistema sistema = new Sistema(1, "Sistema", "", "", "sys2025");
 
-        Estoque.iniciarMonitoramento();
-        UserDatabase.carregarUsuariosDoBanco();
-
         // Inicializando produtos/estoque
         List<Map<String, Object>> produtos = SupabaseConfig.getData("produtos", "idProduto", true);
 
@@ -49,8 +46,6 @@ public class Main {
 
             Estoque.adicionarEstoque(novoProduto, quantidade, sistema);
         }
-
-
 
         com.example.lojabumi.HelloApplication.main(args);
     }
