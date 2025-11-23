@@ -2,17 +2,19 @@ package com.example.lojabumi.produtos;
 
 import com.example.lojabumi.usuario.Permissao;
 import com.example.lojabumi.usuario.Usuario;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Estoque implements Runnable {
+    private static StringBuilder mensagem = new StringBuilder();
     private static Map<Integer, Integer> estoque = new HashMap<>();
     private static Map<Integer, Produto> produtos = new HashMap<>();
 
-    // Atributos para o monitoramento
     private static final int LIMITE_CRITICO = 5;
-    private static final int INTERVALO_VERIFICACAO = 60000; // 60 segundos
+    private static final int INTERVALO_VERIFICACAO = 30000; // 60 segundos
     private static Thread threadMonitor;
     private static boolean executando = false;
 
@@ -36,7 +38,7 @@ public class Estoque implements Runnable {
     public void run() {
         try {
             while (executando) {
-                verificarEstoqueCritico();
+                verificarEstoque();
                 Thread.sleep(INTERVALO_VERIFICACAO);
             }
         } catch (InterruptedException e) {
@@ -48,31 +50,51 @@ public class Estoque implements Runnable {
         }
     }
 
-    private static void verificarEstoqueCritico() {
+    private static void verificarEstoque() {
         try {
-            boolean temEstoqueCritico = false;
+            mensagem.setLength(0);
+            boolean abaixoEstoque = false;
 
             for (Map.Entry<Integer, Integer> entry : estoque.entrySet()) {
-                try {
-                    int idProduto = entry.getKey();
-                    int quantidade = entry.getValue();
-                    Produto produto = produtos.get(idProduto);
+                int idProduto = entry.getKey();
+                int quantidade = entry.getValue();
+                Produto produto = produtos.get(idProduto);
 
-                    if (produto != null && quantidade < LIMITE_CRITICO) {
-                        temEstoqueCritico = true;
-                        System.out.println("ALERTA: Produto '" + produto.getNome() +
-                                "' (ID: " + idProduto + ") com estoque baixo: " + quantidade + " unidades.");
-                    }
-                } catch (NullPointerException e) {
-                    throw new IllegalStateException("Erro ao verificar produto", e);
+                if (produto != null && quantidade < LIMITE_CRITICO) {
+                    abaixoEstoque = true;
+
+                    mensagem.append("- ")
+                            .append(produto.getNome())
+                            .append(": ")
+                            .append(quantidade)
+                            .append(" unidades\n");
                 }
             }
 
-            if (!temEstoqueCritico) {
-                System.out.println("Todos os produtos com estoque adequado.");
+            if (abaixoEstoque) {
+                System.out.println("ALERTA: " + mensagem.toString());
+
+                Platform.runLater(() -> {
+                    mostrarNotificacao(mensagem.toString());
+                });
             }
         } catch (Exception e) {
-            throw new RuntimeException("Erro ao verificar estoque crítico", e);
+            System.err.println("Erro crítico no monitoramento de estoque: " + e.getMessage());
+            e.printStackTrace();
+
+        }
+    }
+
+    private static void mostrarNotificacao(String mensagem) {
+        try {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Alerta de Estoque Crítico");
+            alert.setHeaderText("Produtos com estoque baixo!");
+            alert.setContentText(mensagem);
+            alert.show();
+        } catch (Exception e) {
+            System.err.println("Erro ao criar alerta: " + e.getMessage());
+            throw e; // Repassa para o tratamento superior
         }
     }
 

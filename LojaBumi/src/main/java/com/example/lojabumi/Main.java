@@ -16,7 +16,6 @@ public class Main {
 
         UserDatabase.adicionarUsuario(adm);
         UserDatabase.adicionarUsuario(cliente1);
-        Estoque.iniciarMonitoramento();
 
         com.example.lojabumi.HelloApplication.main(args);
     }
