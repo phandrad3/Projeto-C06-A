@@ -1,7 +1,6 @@
 package com.example.lojabumi.config;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -11,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 public class SupabaseConfig {
     private static final String SUPABASE_URL = "https://cfwsneatmmtsjpormtaa.supabase.co";
@@ -172,12 +172,12 @@ public class SupabaseConfig {
         try {
             // Constrói a URL com o parâmetro de ordenação
             String orderParam = ascending ? "order=" + orderBy + ".asc" : "order=" + orderBy + ".desc";
-            URL endpoint = new URL(url + "/rest/v1/" + tableName + "?" + orderParam);
+            URL endpoint = new URL(SUPABASE_URL + "/rest/v1/" + tableName + "?" + orderParam);
 
             HttpURLConnection connection = (HttpURLConnection) endpoint.openConnection();
             connection.setRequestMethod("GET");
-            connection.setRequestProperty("apikey", key);
-            connection.setRequestProperty("Authorization", "Bearer " + key);
+            connection.setRequestProperty("apikey", SUPABASE_KEY);
+            connection.setRequestProperty("Authorization", "Bearer " + SUPABASE_KEY);
             connection.setRequestProperty("Content-Type", "application/json");
 
             int responseCode = connection.getResponseCode();
@@ -227,12 +227,12 @@ public class SupabaseConfig {
         try {
             // Constrói a URL com filtro e ordenação
             String orderParam = ascending ? "order=" + orderBy + ".asc" : "order=" + orderBy + ".desc";
-            URL endpoint = new URL(url + "/rest/v1/" + tableName + "?" + filter + "&" + orderParam);
+            URL endpoint = new URL(SUPABASE_URL + "/rest/v1/" + tableName + "?" + filter + "&" + orderParam);
 
             HttpURLConnection connection = (HttpURLConnection) endpoint.openConnection();
             connection.setRequestMethod("GET");
-            connection.setRequestProperty("apikey", key);
-            connection.setRequestProperty("Authorization", "Bearer " + key);
+            connection.setRequestProperty("apikey", SUPABASE_KEY);
+            connection.setRequestProperty("Authorization", "Bearer " + SUPABASE_KEY);
             connection.setRequestProperty("Content-Type", "application/json");
 
             int responseCode = connection.getResponseCode();

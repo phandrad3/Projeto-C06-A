@@ -6,6 +6,7 @@ import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.produtos.tipo.*;
 import com.example.lojabumi.usuario.tipoConta.Administrador;
 import com.example.lojabumi.usuario.tipoConta.Cliente;
+import com.example.lojabumi.usuario.tipoConta.Sistema;
 import org.controlsfx.control.ListActionView;
 
 import java.util.List;
@@ -14,12 +15,10 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
 
-        Administrador adm = new Administrador(1, "Carlos", "10/10/1985", "carlos@admin.com", "admin123");
-        Cliente cliente1 = new Cliente(101, "João", "01/01/1990", "joao@email.com", "12345");
+        Sistema sistema = new Sistema(1, "Sistema", "", "", "sys2025");
 
-        UserDatabase.adicionarUsuario(adm);
-        UserDatabase.adicionarUsuario(cliente1);
         Estoque.iniciarMonitoramento();
+        UserDatabase.carregarUsuariosDoBanco();
 
         // Inicializando produtos/estoque
         List<Map<String, Object>> produtos = SupabaseConfig.getData("produtos", "idProduto", true);
@@ -48,7 +47,7 @@ public class Main {
                     novoProduto = new NaoPereciveis(nome, preco);
             }
 
-            Estoque.adicionarEstoque(novoProduto, quantidade, adm);
+            Estoque.adicionarEstoque(novoProduto, quantidade, sistema);
         }
 
 
