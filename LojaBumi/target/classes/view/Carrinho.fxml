@@ -22,6 +22,7 @@
                 <TableColumn fx:id="colPreco" text="Preço (R$)" />
                 <TableColumn fx:id="colQuantidade" text="Quantidade" />
                 <TableColumn fx:id="colTotalProduto" text="Total" />
+                <TableColumn fx:id="colDesconto" text="Desconto" />
             </columns>
         </TableView>
 

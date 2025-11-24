@@ -60,12 +60,7 @@ public class RemoverProdutoController {
         if (sucesso) {
             mostrarInfo("Produto removido com sucesso!");
             atualizarChoiceBox();
-
-
-
-            if (!escolherProduto.getItems().isEmpty()) {
-                escolherProduto.getSelectionModel().selectFirst();
-            }
+            escolherProduto.getSelectionModel().clearSelection();
 
         } else {
             mostrarErro("Erro ao remover produto.");

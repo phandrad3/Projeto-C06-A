@@ -25,8 +25,6 @@ public class CarrinhoController {
     private TableView<Produto> tableCarrinho;
 
     @FXML
-    private TableColumn<Produto, Integer> coliD;
-    @FXML
     private TableColumn<Produto, String> colNome;
     @FXML
     private TableColumn<Produto, Double> colPreco;
@@ -34,6 +32,8 @@ public class CarrinhoController {
     private TableColumn<Produto, Integer> colQuantidade;
     @FXML
     private TableColumn<Produto, String> colTotalProduto;
+    @FXML
+    private TableColumn<Produto, String> colDesconto;
     @FXML
     private Label labelTotal;
     @FXML
@@ -78,6 +78,8 @@ public class CarrinhoController {
             double total = p.getPreco() * qtd;
             return new SimpleStringProperty(String.format("R$ %.2f", total));
         });
+
+        colDesconto.setCellValueFactory(new PropertyValueFactory<>("Desconto"));
 
         tableCarrinho.setItems(carrinhoObservable);
 
