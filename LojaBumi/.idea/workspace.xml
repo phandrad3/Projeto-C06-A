@@ -5,27 +5,50 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6aaef6ac-a81e-4e88-9833-ce66d8c16b86" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Cadastro/CadastroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Cadastro/CadastroController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/AddProdutoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/AddProdutoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/AtualizarEstoqueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/AtualizarEstoqueController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/RemoverEstoqueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/RemoverEstoqueController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/RemoverProdutoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/RemoverProdutoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Produtos/ProdutosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Produtos/ProdutosController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/HelloApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/UserDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/UserDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/config/SupabaseConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/config/SupabaseConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/Estoque.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/Estoque.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/Produto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/Eletronico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/Eletronico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/Frios.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/Frios.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/Frutas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/Frutas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/NaoPereciveis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/NaoPereciveis.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/Verduras.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/Verduras.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/usuario/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/usuario/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/usuario/tipoConta/Administrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/usuario/tipoConta/Administrador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/usuario/tipoConta/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/usuario/tipoConta/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/AtualizarEstoque.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/AtualizarEstoque.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/Cadastro.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/RemoverEstoque.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/RemoverEstoque.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/RemoverProduto.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/RemoverProduto.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Cadastro/CadastroController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Cadastro/CadastroController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Carrinho/CarrinhoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Carrinho/CarrinhoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Estoque/AddProdutoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Estoque/AddProdutoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Estoque/AtualizarEstoqueController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Estoque/AtualizarEstoqueController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Estoque/EstoqueController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Estoque/EstoqueController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Estoque/RemoverEstoqueController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Estoque/RemoverEstoqueController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Estoque/RemoverProdutoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Estoque/RemoverProdutoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/MudarTela.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/MudarTela.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Produtos/ProdutosController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Produtos/ProdutosController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/HelloApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/HelloApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Launcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Launcher.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/UserDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/UserDatabase.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/Estoque.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/Estoque.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/Produto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/Produto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Eletronico.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Eletronico.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Frios.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Frios.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Frutas.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Frutas.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/NaoPereciveis.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/NaoPereciveis.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Verduras.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Verduras.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/usuario/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/usuario/Usuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/usuario/tipoConta/Administrador.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/usuario/tipoConta/Administrador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/usuario/tipoConta/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/usuario/tipoConta/Cliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/utilitarios/Compra.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/utilitarios/Compra.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/AtualizarEstoque.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/AtualizarEstoque.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/Cadastro.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/RemoverEstoque.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/RemoverEstoque.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/RemoverProduto.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/RemoverProduto.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,9 +98,10 @@
     &quot;Application.SupabaseConfig.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Ajustes__Interface&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
@@ -106,5 +130,10 @@
       <updated>1762877741497</updated>
     </task>
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Gitignore + Imports" />
+    <MESSAGE value="Busca por id" />
+    <option name="LAST_COMMIT_MESSAGE" value="Busca por id" />
   </component>
 </project>

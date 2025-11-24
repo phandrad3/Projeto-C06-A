@@ -93,7 +93,7 @@ public class ProdutosController {
     @FXML
     public void initialize() {
         sair.setOnAction(e -> {
-                    mudarTela(sair, "/view/Cadastro.fxml");
+                    mudarTela(sair, "/view/Login.fxml");
                 }
         );
         btncarrinho.setOnAction(e -> {
