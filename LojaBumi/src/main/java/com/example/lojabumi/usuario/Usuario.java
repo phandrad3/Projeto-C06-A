@@ -86,24 +86,6 @@ public abstract class Usuario implements Permissao {
     }
 
     public static Usuario validarCredenciais(String email, String senha) {
-        for (Object u : cacheUsuarios) {
-            if (u instanceof Cliente) {
-                Cliente c = (Cliente) u;
-                if (c.getEmail().equals(email) && c.getSenha().equals(senha)) {
-                    usuarioLogado = c;
-                    return c;
-                }
-            }
-
-            if (u instanceof Administrador) {
-                Administrador a = (Administrador) u;
-                if (a.getEmail().equals(email) && a.getSenha().equals(senha)) {
-                    usuarioLogado = a;
-                    return a;
-                }
-            }
-        }
-
         Usuario usuarioBD = buscarUsuarioPorEmail(email, senha);
 
         if (usuarioBD != null) {
