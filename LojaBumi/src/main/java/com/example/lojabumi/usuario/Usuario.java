@@ -57,7 +57,7 @@ public abstract class Usuario implements Permissao {
         return partes[2] + "/" + partes[1] + "/" + partes[0];
     }
 
-    public static Usuario buscarUsuarioPorEmail(String email) {
+    public static Usuario buscarUsuarioPorEmail(String email, String senha) {
         String resposta = SupabaseConfig.getUserByEmail(email);
 
         if (resposta == null || resposta.isEmpty() || resposta.equals("[]")) {
@@ -74,15 +74,23 @@ public abstract class Usuario implements Permissao {
                 String nome = jsonUsuario.getString("nomeUsuario");
                 String dataNasc = jsonUsuario.getString("dataNasc");
                 String emailBD = jsonUsuario.getString("email");
-                String senha = jsonUsuario.getString("senha");
+                String senhaArmazenada = jsonUsuario.getString("senha"); // senha criptografada no banco
                 String tipoUsuario = jsonUsuario.getString("tipoUsuario");
+
+                // Criptografar a senha informada para comparar
+                String senhaInformadaCriptografada = SupabaseConfig.sha256(senha);
+
+                // Verificar se as senhas coincidem
+                if (senhaInformadaCriptografada == null || !senhaInformadaCriptografada.equals(senhaArmazenada)) {
+                    return null; // senha não confere
+                }
 
                 String dataBrasil = converterDataParaBrasil(dataNasc);
 
                 if (tipoUsuario.equals("Cliente")) {
-                    return new Cliente(idUsuario, nome, dataBrasil, emailBD, senha, false);
+                    return new Cliente(idUsuario, nome, dataBrasil, emailBD, senhaArmazenada, false);
                 } else if (tipoUsuario.equals("Administrador")) {
-                    return new Administrador(idUsuario, nome, dataBrasil, emailBD, senha, false);
+                    return new Administrador(idUsuario, nome, dataBrasil, emailBD, senhaArmazenada, false);
                 }
             }
         } catch (Exception e) {

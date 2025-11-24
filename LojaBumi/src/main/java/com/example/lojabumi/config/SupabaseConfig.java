@@ -5,6 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,37 @@ import java.util.regex.Pattern;
 public class SupabaseConfig {
     private static final String SUPABASE_URL = "https://cfwsneatmmtsjpormtaa.supabase.co";
     private static final String SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd3NuZWF0bW10c2pwb3JtdGFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIyNTk1MTcsImV4cCI6MjA3NzgzNTUxN30.M77raYr4ZdmcSfmgeF3lJe1rb_QPD0gf9AtSXiJYUyc";
+
+    /**
+     * Gera o hash SHA-256 de uma string
+     * @param input A string a ser hasheada
+     * @return O hash em formato hexadecimal, ou null em caso de erro
+     */
+    public static String sha256(String input) {
+        try {
+            // Cria uma instância do MessageDigest para SHA-256
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+            // Calcula o hash da string
+            byte[] hash = digest.digest(input.getBytes(StandardCharsets.UTF_8));
+
+            // Converte o hash para representação hexadecimal
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch (Exception e) {
+            // Trata qualquer erro de forma simples (improvável de acontecer com SHA-256)
+            System.err.println("Erro ao gerar hash SHA-256: " + e.getMessage());
+            return null;
+        }
+    }
 
     public static void insertData(String tableName, String jsonInputString) {
         try {

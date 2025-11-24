@@ -28,9 +28,9 @@ public class UserDatabase {
             }
         }
 
-        Usuario usuarioBD = Usuario.buscarUsuarioPorEmail(email);
+        Usuario usuarioBD = Usuario.buscarUsuarioPorEmail(email, senha);
 
-        if (usuarioBD != null && usuarioBD.getSenha().equals(senha)) {
+        if (usuarioBD != null) {
             usuarios.add(usuarioBD);
             usuarioLogado = usuarioBD;
             return usuarioBD;
