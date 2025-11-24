@@ -117,6 +117,7 @@ public class AddProdutoController {
             nomeField.clear();
             precoField.clear();
             quantidadeField.clear();
+            tipoChoiceBox.getSelectionModel().clearSelection();
 
         } else {
             new Alert(Alert.AlertType.ERROR, "Não foi possível adicionar o produto.").showAndWait();

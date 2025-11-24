@@ -81,6 +81,7 @@ public class RemoverEstoqueController {
 
         quantidadeAtualLabel.setText("Quantidade Atual: " + Estoque.getEstoque(produto));
         quantidadeRemoverField.clear();
+        escolherProduto.getSelectionModel().clearSelection();
     }
 
 
