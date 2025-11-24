@@ -5,38 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6aaef6ac-a81e-4e88-9833-ce66d8c16b86" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Cadastro/CadastroController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Carrinho/CarrinhoController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Estoque/AddProdutoController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Estoque/AtualizarEstoqueController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Estoque/EstoqueController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Estoque/RemoverEstoqueController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Estoque/RemoverProdutoController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/MudarTela.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Produtos/ProdutosController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/HelloApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Launcher.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Main$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Main$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/Estoque.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/Produto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Eletronico.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Frios.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Frutas.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/NaoPereciveis.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Verduras.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/usuario/Usuario.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/usuario/tipoConta/Administrador.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/usuario/tipoConta/Cliente.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/utilitarios/Compra.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Cadastro_Login/CadastroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Cadastro_Login/CadastroController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Carrinho/CarrinhoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Carrinho/CarrinhoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/EstoqueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/EstoqueController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/Cadastro.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/Cadastro.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/Carrinho.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/Carrinho.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/view/AddProduto.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/view/AtualizarEstoque.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/Cadastro.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/view/Carrinho.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/view/Estoque.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/Login.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/view/Produtos.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/view/RemoverEstoque.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/view/RemoverProduto.fxml" beforeDir="false" />
@@ -62,12 +44,12 @@
     &quot;assignee&quot;: &quot;Armengolz&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/phandrad3/Projeto-C06-A.git&quot;,
-    &quot;accountId&quot;: &quot;e87f059f-4605-48fe-bcd4-ab6167a87b93&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/phandrad3/Projeto-C06-A.git",
+    "accountId": "cbdd85b8-3191-4d19-b33e-125a41f34749"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -83,23 +65,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.SupabaseConfig.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SupabaseConfig.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Desconto__e__ajustes__tabela&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">

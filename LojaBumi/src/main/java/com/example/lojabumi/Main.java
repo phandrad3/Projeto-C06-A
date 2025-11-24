@@ -5,7 +5,6 @@ import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.produtos.tipo.*;
 import com.example.lojabumi.usuario.tipoConta.Sistema;
-
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +42,6 @@ public class Main {
 
             Estoque.adicionarEstoque(novoProduto, quantidade, sistema);
         }
-
         com.example.lojabumi.HelloApplication.main(args);
     }
 }

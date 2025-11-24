@@ -18,6 +18,8 @@ public class CadastroController {
     @FXML
     private Button btnLogin;
     @FXML
+    private Button btnVoltar;
+    @FXML
     private TextField nomeField;
     @FXML
     private TextField data_nascField;
@@ -118,4 +120,8 @@ public class CadastroController {
         alert.setContentText(mensagem);
         alert.showAndWait();
     }
+    public void initialize() {
+        btnVoltar.setOnAction(e -> mudarTela(btnVoltar, "/view/Login.fxml"));
+    }
 }
+

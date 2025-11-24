@@ -10,11 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.Map;
@@ -27,7 +23,7 @@ public class CarrinhoController {
     @FXML
     private TableColumn<Produto, String> colNome;
     @FXML
-    private TableColumn<Produto, Double> colPreco;
+    private TableColumn<Produto, String> colPreco;
     @FXML
     private TableColumn<Produto, Integer> colQuantidade;
     @FXML
@@ -36,6 +32,8 @@ public class CarrinhoController {
     private TableColumn<Produto, String> colDesconto;
     @FXML
     private Label labelTotal;
+    @FXML
+    private Label labelTotalSemDesconto;
     @FXML
     private Button btnVoltarProdutos;
     @FXML
@@ -64,7 +62,9 @@ public class CarrinhoController {
         tableCarrinho.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        colPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
+        colPreco.setCellValueFactory(cellData ->
+                new SimpleStringProperty(String.format("R$ %.2f", cellData.getValue().getPreco()))
+        );
 
         colQuantidade.setCellValueFactory(cellData -> {
             Produto p = cellData.getValue();
@@ -75,11 +75,16 @@ public class CarrinhoController {
         colTotalProduto.setCellValueFactory(cellData -> {
             Produto p = cellData.getValue();
             int qtd = clienteLogado.getCarrinho().getOrDefault(p, 0);
-            double total = p.getPrecoFinal() * qtd;
+            double total = p.getPreco() * qtd;
             return new SimpleStringProperty(String.format("R$ %.2f", total));
         });
 
-        colDesconto.setCellValueFactory(new PropertyValueFactory<>("Desconto"));
+        colDesconto.setCellValueFactory(cellData -> {
+            Produto p = cellData.getValue();
+            int qtd = clienteLogado.getCarrinho().getOrDefault(p, 0);
+            double total = p.getPrecoFinal() * qtd;
+            return new SimpleStringProperty(String.format("R$ %.2f", total));
+        });
 
         tableCarrinho.setItems(carrinhoObservable);
 
@@ -98,13 +103,20 @@ public class CarrinhoController {
     public void atualizarCarrinho() {
         Map<Produto, Integer> carrinhoMap = clienteLogado.getCarrinho();
         carrinhoObservable.setAll(carrinhoMap.keySet());
-        atualizarTotal();
+        atualizarTotalComDesconto();
+        atualizarTotalSemDesconto();
     }
 
-    private void atualizarTotal() {
+    private void atualizarTotalComDesconto() {
         double total = Compra.calcularTotalComDesconto(clienteLogado.getCarrinho());
-        labelTotal.setText("Total: R$ " + String.format("%.2f", total));
+        labelTotal.setText("Total a pagar: R$ " + String.format("%.2f", total));
     }
+    private void atualizarTotalSemDesconto() {
+        double total = Compra.calcularTotal(clienteLogado.getCarrinho());
+        labelTotalSemDesconto.setText("Total sem Desconto: R$ " + String.format("%.2f", total));
+    }
+
+
 
     private void finalizarCarrinho() {
         if (clienteLogado.getCarrinho().isEmpty()) {

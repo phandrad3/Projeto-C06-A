@@ -25,7 +25,7 @@ public class EstoqueController {
     @FXML
     private TableColumn<Produto, String> colNome;
     @FXML
-    private TableColumn<Produto, Double> colPreco;
+    private TableColumn<Produto, String> colPreco;
     @FXML
     private TableColumn<Produto, Integer> colQuantidade;
     @FXML
@@ -44,7 +44,9 @@ public class EstoqueController {
                 new SimpleIntegerProperty(cellData.getValue().getId()).asObject()
         );
         colNome.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("nome"));
-        colPreco.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("preco"));
+        colPreco.setCellValueFactory(cellData ->
+                new SimpleStringProperty(String.format("R$ %.2f", cellData.getValue().getPreco()))
+        );
         colQuantidade.setCellValueFactory(cellData ->
                 new SimpleIntegerProperty(Estoque.getEstoque(cellData.getValue())).asObject()
         );

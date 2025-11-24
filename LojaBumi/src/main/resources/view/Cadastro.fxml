@@ -33,10 +33,6 @@
                         <Font size="22.0" />
                      </font>
                   </TextField>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" maxWidth="600.0" spacing="15">
-               <children>
                   <TextField fx:id="data_nascField" alignment="CENTER" prefWidth="450.0" promptText="Data de Nascimento..." style="-fx-background-color: transparent;                                           -fx-border-width: 0 0 4 0;                                           -fx-border-color: #F8FAFC;                                           -fx-text-fill: white;">
                      <font>
                         <Font size="22.0" />
@@ -54,18 +50,13 @@
                         </TextField>
                     </children>
                 </HBox>
-
-                <HBox alignment="CENTER" maxWidth="600.0" spacing="15">
-                    <children>
+            <HBox alignment="CENTER" maxWidth="600.0" spacing="15">
+               <children>
                         <PasswordField fx:id="senhaField" alignment="CENTER" prefWidth="450.0" promptText="Senha..." style="-fx-background-color: transparent;                                           -fx-border-color: #F8FAFC;                                           -fx-border-width: 0 0 4 0;                                           -fx-text-fill: white;">
                             <font>
                                 <Font size="22.0" />
                             </font>
                         </PasswordField>
-                    </children>
-                </HBox>
-            <HBox alignment="CENTER" maxWidth="600.0" spacing="15">
-               <children>
                   <PasswordField fx:id="confirme_senhaField" alignment="CENTER" prefWidth="450.0" promptText="Confirme a senha..." style="-fx-background-color: transparent;                                           -fx-border-color: #F8FAFC;                                           -fx-border-width: 0 0 4 0;                                           -fx-text-fill: white;">
                      <font>
                         <Font size="22.0" />
@@ -73,12 +64,21 @@
                   </PasswordField>
                </children>
             </HBox>
-
-                <Button fx:id="btnLogin" onAction="#tentarCadastro" alignment="CENTER" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #0EA5E9;                                -fx-border-color: #FFFFFF;                                -fx-background-radius: 10;                                -fx-border-radius: 10;" text="Criar conta" textFill="WHITE">
-                    <font>
+            <HBox alignment="CENTER" maxWidth="600.0" spacing="15">
+               <children>
+                  <Button fx:id="btnLogin" alignment="CENTER" mnemonicParsing="false" onAction="#tentarCadastro" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #0EA5E9;                                -fx-border-color: #FFFFFF;                                -fx-background-radius: 10;                                -fx-border-radius: 10;" text="Criar conta" textFill="WHITE">
+                     <font>
                         <Font name="System Bold Italic" size="26.0" />
-                    </font>
-                </Button>
+                     </font>
+                  </Button>
+      
+                      <Button fx:id="btnVoltar" alignment="CENTER" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #0EA5E9;                                -fx-border-color: #FFFFFF;                                -fx-background-radius: 10;                                -fx-border-radius: 10;" text="Voltar" textFill="WHITE">
+                          <font>
+                              <Font name="System Bold Italic" size="26.0" />
+                          </font>
+                      </Button>
+               </children>
+            </HBox>
 
             </children>
         </VBox>
