@@ -29,20 +29,30 @@ public class Cliente extends Usuario {
 
     public void addProduto(Produto produto) {
         int quantidadeCarrinho = carrinho.getOrDefault(produto, 0);
-
         if (quantidadeCarrinho >= Estoque.getEstoque(produto)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");
             alert.setHeaderText(null);
             alert.setContentText("Não temos mais estoque desse produto!");
             alert.showAndWait();
-            System.out.println("Estoque insuficiente");
             return;
         }
-        new Alert(Alert.AlertType.INFORMATION, "Produto adicionado no carrinho!").showAndWait();
         carrinho.put(produto, quantidadeCarrinho + 1);
-        System.out.println("Produto '" + produto.getNome() + "' adicionado ao carrinho.");
+
+        String texto = "Produto adicionado!\n\nItens no carrinho:\n";
+
+        for (Produto p : carrinho.keySet()) {
+            int qtd = carrinho.get(p);
+            texto += "- " + p.getNome() + " (x" + qtd + ")\n";
+        }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Carrinho");
+        alert.setHeaderText("Produto adicionado ao carrinho!");
+        alert.setContentText(texto.toString());
+        alert.showAndWait();
     }
+
 
     @Override
     public boolean alterarEstoque() {

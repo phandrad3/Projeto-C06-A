@@ -14,7 +14,6 @@ public class Main {
 
         Sistema sistema = new Sistema(1, "Sistema", "", "", "sys2025");
 
-        // Inicializando produtos/estoque
         List<Map<String, Object>> produtos = SupabaseConfig.getData("produtos", "idProduto", true);
 
         for (Map<String, Object> produto : produtos) {

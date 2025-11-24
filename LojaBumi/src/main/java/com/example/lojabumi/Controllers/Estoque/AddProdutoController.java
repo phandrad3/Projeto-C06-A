@@ -4,6 +4,7 @@ import com.example.lojabumi.config.SupabaseConfig;
 import com.example.lojabumi.produtos.*;
 import com.example.lojabumi.produtos.tipo.*;
 import com.example.lojabumi.usuario.Usuario;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 
@@ -49,6 +50,9 @@ public class AddProdutoController {
             );
         }
         );
+        Platform.runLater(() -> {
+            tipoChoiceBox.lookup(".label").setStyle("-fx-text-fill: white;");
+        });
     }
 
 
@@ -113,13 +117,10 @@ public class AddProdutoController {
             nomeField.clear();
             precoField.clear();
             quantidadeField.clear();
+
         } else {
             new Alert(Alert.AlertType.ERROR, "Não foi possível adicionar o produto.").showAndWait();
         }
     }
-
-
-
-
 
 }
