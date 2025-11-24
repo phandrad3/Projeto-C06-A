@@ -6,13 +6,26 @@
   <component name="ChangeListManager">
     <list default="true" id="6aaef6ac-a81e-4e88-9833-ce66d8c16b86" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/AddProdutoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/AddProdutoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/AtualizarEstoqueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/AtualizarEstoqueController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/RemoverEstoqueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/RemoverEstoqueController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/RemoverProdutoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/RemoverProdutoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Carrinho/CarrinhoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Carrinho/CarrinhoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Produtos/ProdutosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Produtos/ProdutosController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/Estoque.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/Estoque.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/Produto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/Eletronico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/Eletronico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/Frios.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/Frios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/Frutas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/Frutas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/NaoPereciveis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/NaoPereciveis.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/Verduras.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/tipo/Verduras.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/utilitarios/Compra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/utilitarios/Compra.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Carrinho/CarrinhoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Carrinho/CarrinhoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Produtos/ProdutosController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/Controllers/Produtos/ProdutosController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/Estoque.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/Estoque.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/Produto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/Produto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Eletronico.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Eletronico.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Frios.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Frios.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Frutas.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Frutas.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/NaoPereciveis.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/NaoPereciveis.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Verduras.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/produtos/tipo/Verduras.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/lojabumi/utilitarios/Compra.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/lojabumi/utilitarios/Compra.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,23 +69,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.SupabaseConfig.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.SupabaseConfig.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "polimorfismo",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">

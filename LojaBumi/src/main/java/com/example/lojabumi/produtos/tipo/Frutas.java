@@ -9,4 +9,9 @@ public class Frutas extends Produto {
 
     }
 
+    @Override
+    public double getPrecoFinal() {
+        return getPreco() * 0.95;
+    }
+
 }

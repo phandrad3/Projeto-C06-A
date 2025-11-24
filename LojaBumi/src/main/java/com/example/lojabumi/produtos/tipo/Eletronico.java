@@ -8,6 +8,12 @@ public class Eletronico extends Produto {
         super(nome, preco);
 
     }
+
+    @Override
+    public double getPrecoFinal() {
+        return getPreco() * 0.90;
+    }
+
 }
 
 

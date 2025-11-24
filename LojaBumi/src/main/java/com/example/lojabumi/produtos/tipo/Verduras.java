@@ -9,4 +9,9 @@ public class Verduras extends Produto {
 
     }
 
+    @Override
+    public double getPrecoFinal() {
+        return getPreco() * 0.50;
+    }
+
     }

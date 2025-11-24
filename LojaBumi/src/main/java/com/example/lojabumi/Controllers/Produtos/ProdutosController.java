@@ -93,6 +93,7 @@ public class ProdutosController {
     public void initialize() {
         sair.setOnAction(e -> {
                     mudarTela(sair, "/view/Login.fxml");
+                    Estoque.pararMonitoramento();
                 }
         );
         btncarrinho.setOnAction(e -> {

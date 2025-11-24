@@ -9,4 +9,9 @@ public class Frios extends Produto {
 
     }
 
+    @Override
+    public double getPrecoFinal() {
+        return getPreco() * 0.90;
+    }
+
 }

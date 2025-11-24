@@ -50,6 +50,18 @@ public class Compra implements Permissao {
         return total;
     }
 
+    public static double calcularTotalComDesconto(Map<Produto, Integer> carrinho) {
+        double total = 0.0;
+
+        for (Map.Entry<Produto, Integer> entry : carrinho.entrySet()) {
+            Produto produto = entry.getKey();
+            int quantidade = entry.getValue();
+            total += produto.getPrecoFinal() * quantidade;
+        }
+
+        return total;
+    }
+
     public static boolean finalizarCompra(Map<Produto, Integer> carrinho) {
         List<Produto> produtosInsuficientes = new ArrayList<>();
 

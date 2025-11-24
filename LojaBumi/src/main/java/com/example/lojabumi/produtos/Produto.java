@@ -41,6 +41,8 @@ public abstract class Produto {
         return id == produto.id;
     }
 
+    public abstract double getPrecoFinal();
+
     @Override
     public int hashCode() {
         return id;

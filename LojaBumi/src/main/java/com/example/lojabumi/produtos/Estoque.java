@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class Estoque implements Runnable {
     private static StringBuilder mensagem = new StringBuilder();
+    private static boolean alertaAtivo = false;
     private static Map<Integer, Integer> estoque = new HashMap<>();
     private static Map<Integer, Produto> produtos = new HashMap<>();
 
@@ -62,7 +63,6 @@ public class Estoque implements Runnable {
 
                 if (produto != null && quantidade < LIMITE_CRITICO) {
                     abaixoEstoque = true;
-
                     mensagem.append("- ")
                             .append(produto.getNome())
                             .append(": ")
@@ -71,30 +71,47 @@ public class Estoque implements Runnable {
                 }
             }
 
-            if (abaixoEstoque) {
+            if (abaixoEstoque && !alertaAtivo) { // Só mostra se não houver alerta ativo
                 System.out.println("ALERTA: " + mensagem.toString());
 
+                // Criar uma cópia da mensagem para usar no Platform.runLater
+                final String mensagemFinal = mensagem.toString();
+
                 Platform.runLater(() -> {
-                    mostrarNotificacao(mensagem.toString());
+                    mostrarNotificacao(mensagemFinal);
                 });
             }
         } catch (Exception e) {
             System.err.println("Erro crítico no monitoramento de estoque: " + e.getMessage());
             e.printStackTrace();
-
         }
     }
 
+
     private static void mostrarNotificacao(String mensagem) {
         try {
+            alertaAtivo = true; // Marca que o alerta está ativo
+
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Alerta de Estoque Crítico");
             alert.setHeaderText("Produtos com estoque baixo!");
             alert.setContentText(mensagem);
+
+            // Adiciona um listener para quando o alerta for fechado
+            alert.setOnHidden(event -> {
+                alertaAtivo = false; // Libera para novos alertas quando fechar
+            });
+
+            // Também adiciona um listener para quando o alerta for fechado com o botão OK
+            alert.setOnCloseRequest(event -> {
+                alertaAtivo = false; // Libera para novos alertas quando fechar
+            });
+
             alert.show();
         } catch (Exception e) {
+            alertaAtivo = false; // Garante que a flag seja resetada em caso de erro
             System.err.println("Erro ao criar alerta: " + e.getMessage());
-            throw e; // Repassa para o tratamento superior
+            throw e;
         }
     }
 

@@ -75,7 +75,7 @@ public class CarrinhoController {
         colTotalProduto.setCellValueFactory(cellData -> {
             Produto p = cellData.getValue();
             int qtd = clienteLogado.getCarrinho().getOrDefault(p, 0);
-            double total = p.getPreco() * qtd;
+            double total = p.getPrecoFinal() * qtd;
             return new SimpleStringProperty(String.format("R$ %.2f", total));
         });
 
@@ -100,7 +100,7 @@ public class CarrinhoController {
     }
 
     private void atualizarTotal() {
-        double total = Compra.calcularTotal(clienteLogado.getCarrinho());
+        double total = Compra.calcularTotalComDesconto(clienteLogado.getCarrinho());
         labelTotal.setText("Total: R$ " + String.format("%.2f", total));
     }
 
