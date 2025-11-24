@@ -29,6 +29,8 @@ public abstract class Produto {
         this.preco = preco;
     }
 
+    public String toString() {return getId() +" " +getNome(); }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,6 +1,5 @@
 package com.example.lojabumi.Controllers.Produtos;
 
-
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Usuario;
@@ -93,7 +92,7 @@ public class ProdutosController {
     @FXML
     public void initialize() {
         sair.setOnAction(e -> {
-                    mudarTela(sair, "/view/Cadastro.fxml");
+                    mudarTela(sair, "/view/Login.fxml");
                 }
         );
         btncarrinho.setOnAction(e -> {
@@ -117,6 +116,5 @@ public class ProdutosController {
         }
         mudarTela(estoque, "/view/Estoque.fxml");
     }
-
 
 }

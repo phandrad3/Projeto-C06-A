@@ -3,9 +3,11 @@ package com.example.lojabumi.Controllers.Estoque;
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Usuario;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 import static com.example.lojabumi.Controllers.MudarTela.mudarTela;
@@ -13,7 +15,7 @@ import static com.example.lojabumi.Controllers.MudarTela.mudarTela;
 public class AtualizarEstoqueController {
 
     @FXML
-    private TextField buscarField;
+    private ChoiceBox<Produto> escolherProduto;
 
     @FXML
     private TextField precoField;
@@ -24,35 +26,23 @@ public class AtualizarEstoqueController {
     @FXML
     private Button btnVoltar;
 
+
     private Usuario usuario = Usuario.getUsuarioLogado();
 
 
-
-    private Produto buscarProdutoPorNome() {
-        String nomeBusca = buscarField.getText().trim();
-
-        if (nomeBusca.isEmpty()) {
-            mostrarErro("Digite o nome do produto.");
-            return null;
-        }
-
-        for (Produto p : Estoque.getProdutos().values()) {
-            if (p.getNome().equalsIgnoreCase(nomeBusca)) {
-                return p;
-            }
-        }
-
-        return null;
+    private void atualizarChoiceBox() {
+        escolherProduto.getItems().clear();
+        escolherProduto.getItems().addAll(Estoque.getProdutos().values());
     }
 
 
     @FXML
     public void atualizarEstoque() {
 
-        Produto produtoEncontrado = buscarProdutoPorNome();
+        Produto produtoSelecionado = escolherProduto.getValue();
 
-        if (produtoEncontrado == null) {
-            mostrarErro("Produto não encontrado no estoque.");
+        if (produtoSelecionado == null) {
+            mostrarErro("Escolha um produto.");
             return;
         }
 
@@ -65,7 +55,7 @@ public class AtualizarEstoqueController {
             try {
                 double novoPreco = Double.parseDouble(precoField.getText().trim());
 
-                boolean precoAtualizado = Estoque.atualizarValor(produtoEncontrado, novoPreco, usuario);
+                boolean precoAtualizado = Estoque.atualizarValor(produtoSelecionado, novoPreco, usuario);
                 if (!precoAtualizado) {
                     mostrarErro("Erro ao atualizar o preço. Verifique os dados.");
                     return;
@@ -90,7 +80,7 @@ public class AtualizarEstoqueController {
             return;
         }
 
-        boolean sucesso = Estoque.atualizarEstoque(produtoEncontrado, novaQuantidade, usuario);
+        boolean sucesso = Estoque.atualizarEstoque(produtoSelecionado, novaQuantidade, usuario);
 
         if (!sucesso) {
             mostrarErro("Erro ao atualizar estoque. Verifique os dados.");
@@ -98,13 +88,10 @@ public class AtualizarEstoqueController {
         }
 
         mostrarInfo("Estoque atualizado com sucesso!");
-        buscarField.clear();
         precoField.clear();
         quantidadeField.clear();
+        escolherProduto.getSelectionModel().clearSelection();
     }
-
-
-
 
     @FXML
     public void initialize() {
@@ -112,9 +99,11 @@ public class AtualizarEstoqueController {
                     mudarTela(btnVoltar, "/view/Estoque.fxml");
                 }
         );
+        atualizarChoiceBox();
+        Platform.runLater(() -> {
+            escolherProduto.lookup(".label").setStyle("-fx-text-fill: white;");
+        });
     }
-
-
 
     private void mostrarErro(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
