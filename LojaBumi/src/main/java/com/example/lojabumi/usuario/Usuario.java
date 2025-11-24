@@ -5,6 +5,7 @@ import com.example.lojabumi.usuario.tipoConta.Administrador;
 import com.example.lojabumi.config.SupabaseConfig;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.util.ArrayList;
 
 public abstract class Usuario implements Permissao {
     protected int idUsuario;
@@ -12,6 +13,9 @@ public abstract class Usuario implements Permissao {
     protected String dataNasc;
     protected String email;
     protected String senha;
+
+    private static ArrayList<Object> cacheUsuarios = new ArrayList<>();
+    private static Usuario usuarioLogado;
 
     public Usuario(int idUsuario, String nome, String dataNasc, String email, String senha) {
         this.idUsuario = idUsuario;
@@ -31,6 +35,14 @@ public abstract class Usuario implements Permissao {
 
     public String getSenha() {
         return senha;
+    }
+
+    public static Usuario getUsuarioLogado() {
+        return usuarioLogado;
+    }
+
+    public static void setUsuarioLogado(Usuario usuario) {
+        usuarioLogado = usuario;
     }
 
     public static String converterDataParaISO(String dataBrasil) {
@@ -57,6 +69,52 @@ public abstract class Usuario implements Permissao {
         return partes[2] + "/" + partes[1] + "/" + partes[0];
     }
 
+    public static Usuario registrarUsuario(int idUsuario, String nome, String dataNasc,
+                                           String email, String senha, String tipoUsuario) {
+        Usuario usuario;
+        if (tipoUsuario.equalsIgnoreCase("Cliente")) {
+            usuario = new Cliente(idUsuario, nome, dataNasc, email, senha, true);
+        } else if (tipoUsuario.equalsIgnoreCase("Administrador")) {
+            usuario = new Administrador(idUsuario, nome, dataNasc, email, senha, true);
+        } else {
+            throw new IllegalArgumentException("Tipo de usuário inválido: " + tipoUsuario);
+        }
+
+        cacheUsuarios.add(usuario);
+
+        return usuario;
+    }
+
+    public static Usuario validarCredenciais(String email, String senha) {
+        for (Object u : cacheUsuarios) {
+            if (u instanceof Cliente) {
+                Cliente c = (Cliente) u;
+                if (c.getEmail().equals(email) && c.getSenha().equals(senha)) {
+                    usuarioLogado = c;
+                    return c;
+                }
+            }
+
+            if (u instanceof Administrador) {
+                Administrador a = (Administrador) u;
+                if (a.getEmail().equals(email) && a.getSenha().equals(senha)) {
+                    usuarioLogado = a;
+                    return a;
+                }
+            }
+        }
+
+        Usuario usuarioBD = buscarUsuarioPorEmail(email, senha);
+
+        if (usuarioBD != null) {
+            cacheUsuarios.add(usuarioBD);
+            usuarioLogado = usuarioBD;
+            return usuarioBD;
+        }
+
+        return null;
+    }
+
     public static Usuario buscarUsuarioPorEmail(String email, String senha) {
         String resposta = SupabaseConfig.getUserByEmail(email);
 
@@ -74,15 +132,13 @@ public abstract class Usuario implements Permissao {
                 String nome = jsonUsuario.getString("nomeUsuario");
                 String dataNasc = jsonUsuario.getString("dataNasc");
                 String emailBD = jsonUsuario.getString("email");
-                String senhaArmazenada = jsonUsuario.getString("senha"); // senha criptografada no banco
+                String senhaArmazenada = jsonUsuario.getString("senha");
                 String tipoUsuario = jsonUsuario.getString("tipoUsuario");
 
-                // Criptografar a senha informada para comparar
                 String senhaInformadaCriptografada = SupabaseConfig.sha256(senha);
 
-                // Verificar se as senhas coincidem
                 if (senhaInformadaCriptografada == null || !senhaInformadaCriptografada.equals(senhaArmazenada)) {
-                    return null; // senha não confere
+                    return null;
                 }
 
                 String dataBrasil = converterDataParaBrasil(dataNasc);

@@ -1,6 +1,6 @@
 package com.example.lojabumi.Controllers.Produtos;
 
-import com.example.lojabumi.UserDatabase;
+
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Usuario;
@@ -72,7 +72,7 @@ public class ProdutosController {
 
     private void adicionarAoCarrinho(int idProduto) {
         Produto produto = Estoque.getProdutos().get(idProduto);
-        Usuario usuarioLogado = UserDatabase.getUsuarioLogado();
+        Usuario usuarioLogado = Usuario.getUsuarioLogado();
         if (produto == null) {
             System.out.println("Erro: produto não encontrado!");
             return;
@@ -105,7 +105,7 @@ public class ProdutosController {
 
     public void entrarEstoque() {
 
-        Usuario usuario = UserDatabase.getUsuarioLogado();
+        Usuario usuario = Usuario.getUsuarioLogado();
 
         if (!usuario.alterarEstoque()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

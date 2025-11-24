@@ -1,6 +1,5 @@
 package com.example.lojabumi.Controllers.Estoque;
 
-import com.example.lojabumi.UserDatabase;
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Usuario;
@@ -28,7 +27,7 @@ public class RemoverProdutoController {
 
     private Produto produtoEncontrado;
 
-    private final Usuario usuario = UserDatabase.getUsuarioLogado();
+    private final Usuario usuario = Usuario.getUsuarioLogado();
 
     @FXML
     public void initialize() {

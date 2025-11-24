@@ -1,6 +1,5 @@
 package com.example.lojabumi.Controllers.Estoque;
 
-import com.example.lojabumi.UserDatabase;
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Usuario;
@@ -25,7 +24,7 @@ public class AtualizarEstoqueController {
     @FXML
     private Button btnVoltar;
 
-    private Usuario usuario = UserDatabase.getUsuarioLogado();
+    private Usuario usuario = Usuario.getUsuarioLogado();
 
 
 

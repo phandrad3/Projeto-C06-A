@@ -1,6 +1,5 @@
 package com.example.lojabumi.Controllers.Estoque;
 
-import com.example.lojabumi.UserDatabase;
 import com.example.lojabumi.config.SupabaseConfig;
 import com.example.lojabumi.produtos.*;
 import com.example.lojabumi.produtos.tipo.*;
@@ -54,7 +53,7 @@ public class AddProdutoController {
 
 
     private void adicionarProduto() {
-        Usuario usuario = UserDatabase.getUsuarioLogado();
+        Usuario usuario = Usuario.getUsuarioLogado();
 
         String nome = nomeField.getText().trim();
         String precoText = precoField.getText().trim();

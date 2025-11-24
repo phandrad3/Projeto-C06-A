@@ -4,7 +4,6 @@ import com.example.lojabumi.Controllers.MudarTela;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Usuario;
 import com.example.lojabumi.usuario.tipoConta.Cliente;
-import com.example.lojabumi.UserDatabase;
 import com.example.lojabumi.utilitarios.Compra;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -51,7 +50,7 @@ public class CarrinhoController {
 
     @FXML
     public void initialize() {
-        Usuario usuario = UserDatabase.getUsuarioLogado();
+        Usuario usuario = Usuario.getUsuarioLogado();
         if (usuario instanceof Cliente) {
             clienteLogado = (Cliente) usuario;
         }
