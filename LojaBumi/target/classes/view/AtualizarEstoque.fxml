@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
@@ -12,10 +11,10 @@
         <Label alignment="CENTER" style="-fx-font-size: 50px; -fx-font-style: italic;" text="Atualizar Estoque" textFill="WHITE" />
 
         <!-- Campo Buscar por Nome -->
-        <VBox prefHeight="89.0" prefWidth="400.0" spacing="10.0">
+        <VBox spacing="10.0">
             <children>
-                <Label style="-fx-font-size: 25px;" text="Escolha o Produto" textFill="WHITE" />
-            <ChoiceBox fx:id="escolherProduto" prefHeight="0.0" prefWidth="397.0" style="-fx-background-color: #334155; -fx-font-size: 20;" />
+                <Label style="-fx-font-size: 25px;" text="Buscar Produto por Nome" textFill="WHITE" />
+                <TextField fx:id="buscarField" prefWidth="400.0" promptText="Digite o nome do produto..." style="-fx-background-color: #334155; -fx-text-fill: white; -fx-prompt-text-fill: #94A3B8; -fx-font-size: 20px;" />
             </children>
         </VBox>
 

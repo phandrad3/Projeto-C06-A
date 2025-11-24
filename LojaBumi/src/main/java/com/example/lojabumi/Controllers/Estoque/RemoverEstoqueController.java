@@ -3,16 +3,18 @@ package com.example.lojabumi.Controllers.Estoque;
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Usuario;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 import static com.example.lojabumi.Controllers.MudarTela.mudarTela;
 
 public class RemoverEstoqueController {
 
     @FXML
-    private ChoiceBox<Produto> escolherProduto;
+    private TextField buscarField;
 
     @FXML
     private TextField quantidadeRemoverField;
@@ -26,26 +28,32 @@ public class RemoverEstoqueController {
     private Usuario usuario = Usuario.getUsuarioLogado();
 
 
-    private void atualizarChoiceBox() {
-        escolherProduto.getItems().clear();
-        escolherProduto.getItems().addAll(Estoque.getProdutos().values());
-    }
+    private Produto buscarProduto() {
+        String nomeBusca = buscarField.getText().trim();
 
-    private void atualizarQuantidade(Produto produtoSelecionado) {
-        if (produtoSelecionado == null) {
+        if (nomeBusca.isEmpty()) {
             quantidadeAtualLabel.setText("Quantidade Atual: -");
-            return;
+            return null;
         }
 
-        int qtd = Estoque.getEstoque(produtoSelecionado);
-        quantidadeAtualLabel.setText("Quantidade Atual: " + qtd);
+        for (Produto p : Estoque.getProdutos().values()) {
+            if (p.getNome().equalsIgnoreCase(nomeBusca)) {
+
+                int qtd = Estoque.getEstoque(p);
+                quantidadeAtualLabel.setText("Quantidade Atual: " + qtd);
+                return p;
+            }
+        }
+
+        quantidadeAtualLabel.setText("Quantidade Atual: Produto não encontrado");
+        return null;
     }
 
 
     @FXML
     private void removerEstoque() {
 
-        Produto produto = escolherProduto.getValue();
+        Produto produto = buscarProduto();
 
         if (produto == null) {
             mostrarErro("Produto não encontrado no estoque.");
@@ -80,6 +88,7 @@ public class RemoverEstoqueController {
         mostrarInfo("Removido com sucesso!");
 
         quantidadeAtualLabel.setText("Quantidade Atual: " + Estoque.getEstoque(produto));
+        buscarField.clear();
         quantidadeRemoverField.clear();
     }
 
@@ -99,19 +108,16 @@ public class RemoverEstoqueController {
     }
 
 
+
     @FXML
     public void initialize() {
 
-        atualizarChoiceBox();
+        buscarField.textProperty().addListener((obs, oldV, newV) -> {
+            buscarProduto();
+        });
         btnVoltar.setOnAction(e -> {
                     mudarTela(btnVoltar, "/view/Estoque.fxml");
                 }
         );
-        Platform.runLater(() -> {
-            escolherProduto.lookup(".label").setStyle("-fx-text-fill: white;");
-        });
-        escolherProduto.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            atualizarQuantidade(newVal);
-        });
     }
 }
