@@ -97,6 +97,88 @@ public class SupabaseConfig {
         }
     }
 
+    public static void updateData(String tableName, String columnName, String id, String jsonData) {
+        try {
+            String urlStr = SUPABASE_URL + "/rest/v1/" + tableName + "?" + columnName + "=eq." + URLEncoder.encode(id, StandardCharsets.UTF_8.toString());
+            System.out.println("URL de atualização: " + urlStr);
+            System.out.println("Dados JSON: " + jsonData);
+
+            URL url = new URL(urlStr);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestMethod("PATCH");
+
+            conn.setRequestProperty("apikey", SUPABASE_KEY);
+            conn.setRequestProperty("Authorization", "Bearer " + SUPABASE_KEY);
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Prefer", "return=representation");
+
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            try (DataOutputStream dos = new DataOutputStream(conn.getOutputStream())) {
+                byte[] postData = jsonData.getBytes(StandardCharsets.UTF_8);
+                dos.write(postData);
+                dos.flush();
+            }
+
+            int responseCode = conn.getResponseCode();
+            System.out.println("Código de resposta HTTP: " + responseCode);
+
+            StringBuilder response = new StringBuilder();
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                    responseCode < 400 ? conn.getInputStream() : conn.getErrorStream()))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    response.append(line);
+                }
+            }
+
+            System.out.println("Resposta do servidor: " + response.toString());
+
+            if (responseCode == 200 || responseCode == 204) {
+                System.out.println("✅ Atualização realizada com sucesso!");
+            } else {
+                System.out.println("❌ Falha na atualização. Código: " + responseCode);
+            }
+
+            conn.disconnect();
+        } catch (Exception e) {
+            System.err.println("❌ Exceção durante a atualização: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteData(String tableName, String columnName, String id) {
+        try {
+            String urlStr = SUPABASE_URL + "/rest/v1/" + tableName + "?" + columnName + "=eq." + URLEncoder.encode(id, StandardCharsets.UTF_8.toString());
+            URL url = new URL(urlStr);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("DELETE");
+            conn.setRequestProperty("apikey", SUPABASE_KEY);
+            conn.setRequestProperty("Authorization", "Bearer " + SUPABASE_KEY);
+            conn.setRequestProperty("Content-Type", "application/json");
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode != 204) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                System.out.println("Falha ao deletar dados. Código: " + responseCode);
+                System.out.println("Resposta: " + response.toString());
+            } else {
+                System.out.println("Produto removido com sucesso do banco de dados");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static Integer getInt(Map<String, Object> map, String key) {
         Object value = map.get(key);
         if (value == null) {

@@ -25,7 +25,6 @@ public class RemoverEstoqueController {
 
     private Usuario usuario = Usuario.getUsuarioLogado();
 
-
     private void atualizarChoiceBox() {
         escolherProduto.getItems().clear();
         escolherProduto.getItems().addAll(Estoque.getProdutos().values());
@@ -40,7 +39,6 @@ public class RemoverEstoqueController {
         int qtd = Estoque.getEstoque(produtoSelecionado);
         quantidadeAtualLabel.setText("Quantidade Atual: " + qtd);
     }
-
 
     @FXML
     private void removerEstoque() {
@@ -83,7 +81,6 @@ public class RemoverEstoqueController {
         quantidadeRemoverField.clear();
     }
 
-
     private void mostrarErro(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
@@ -97,7 +94,6 @@ public class RemoverEstoqueController {
         alert.setContentText(msg);
         alert.showAndWait();
     }
-
 
     @FXML
     public void initialize() {

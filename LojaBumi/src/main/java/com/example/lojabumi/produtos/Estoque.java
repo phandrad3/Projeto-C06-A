@@ -1,5 +1,6 @@
 package com.example.lojabumi.produtos;
 
+import com.example.lojabumi.config.SupabaseConfig;
 import com.example.lojabumi.usuario.Permissao;
 import com.example.lojabumi.usuario.Usuario;
 import javafx.application.Platform;
@@ -12,9 +13,10 @@ public class Estoque implements Runnable {
     private static StringBuilder mensagem = new StringBuilder();
     private static Map<Integer, Integer> estoque = new HashMap<>();
     private static Map<Integer, Produto> produtos = new HashMap<>();
+    private static final String COLUNA_QUANTIDADE = "quantidade";
 
     private static final int LIMITE_CRITICO = 5;
-    private static final int INTERVALO_VERIFICACAO = 30000; // 60 segundos
+    private static final int INTERVALO_VERIFICACAO = 30000;
     private static Thread threadMonitor;
     private static boolean executando = false;
 
@@ -94,7 +96,7 @@ public class Estoque implements Runnable {
             alert.show();
         } catch (Exception e) {
             System.err.println("Erro ao criar alerta: " + e.getMessage());
-            throw e; // Repassa para o tratamento superior
+            throw e;
         }
     }
 
@@ -127,8 +129,12 @@ public class Estoque implements Runnable {
             }
 
             int idProduto = produto.getId();
-            estoque.put(idProduto, estoque.getOrDefault(idProduto, 0) + quantidade);
+            int novaQuantidade = estoque.getOrDefault(idProduto, 0) + quantidade;
+            estoque.put(idProduto, novaQuantidade);
             produtos.put(idProduto, produto);
+
+            String jsonData = "{\"" + COLUNA_QUANTIDADE + "\": " + novaQuantidade + "}";
+            SupabaseConfig.updateData("produtos", "id", String.valueOf(idProduto), jsonData);
 
             System.out.println("Estoque atualizado: " + quantidade + " unidade(s) do produto '" +
                     produto.getNome() + "' (ID: " + idProduto + ") adicionadas.");
@@ -137,7 +143,7 @@ public class Estoque implements Runnable {
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao adicionar estoque", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao adicionar estoque", e);
         }
@@ -161,12 +167,15 @@ public class Estoque implements Runnable {
             estoque.put(idProduto, novaQuantidade);
             produtos.put(idProduto, produto);
 
+            String jsonData = "{\"" + COLUNA_QUANTIDADE + "\": " + novaQuantidade + "}";
+            SupabaseConfig.updateData("produtos", "id", String.valueOf(idProduto), jsonData);
+
             System.out.println("Quantidade atualizada do produto '" + produto.getNome() + "' para " + novaQuantidade);
             return true;
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao atualizar estoque", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao atualizar estoque", e);
         }
@@ -189,6 +198,9 @@ public class Estoque implements Runnable {
             int idProduto = produto.getId();
             produto.setPreco(novoValor);
 
+            String jsonData = "{\"preco\": " + novoValor + "}";
+            SupabaseConfig.updateData("produtos", "id", String.valueOf(idProduto), jsonData);
+
             System.out.println("Valor do produto '" + produto.getNome() + "' (ID: " + idProduto +
                     ") atualizado para R$ " + novoValor);
 
@@ -196,7 +208,7 @@ public class Estoque implements Runnable {
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao atualizar valor", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao atualizar valor", e);
         }
@@ -211,7 +223,7 @@ public class Estoque implements Runnable {
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao consultar estoque", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao consultar estoque", e);
         }
@@ -238,14 +250,23 @@ public class Estoque implements Runnable {
                 throw new IllegalStateException("Estoque insuficiente. Disponível: " + estoqueAtual + ", solicitado: " + quantidade);
             }
 
-            estoque.put(idProduto, estoqueAtual - quantidade);
+            int novaQuantidade = estoqueAtual - quantidade;
+            estoque.put(idProduto, novaQuantidade);
+
+            String jsonData = "{\"" + COLUNA_QUANTIDADE + "\": " + novaQuantidade + "}";
+            System.out.println("Atualizando produto ID " + idProduto + " na tabela produtos");
+            System.out.println("JSON enviado: " + jsonData);
+
+            SupabaseConfig.updateData("produtos", "id", String.valueOf(idProduto), jsonData);
+
+            System.out.println("Removido " + quantidade + " unidade(s) do produto '" + produto.getNome() + "'. Estoque atual: " + novaQuantidade);
             return true;
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao remover estoque", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (IllegalStateException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao remover estoque", e);
         }
@@ -264,9 +285,10 @@ public class Estoque implements Runnable {
             int idProduto = produto.getId();
 
             if (estoque.containsKey(idProduto)) {
+                SupabaseConfig.deleteData("produtos", "id", String.valueOf(idProduto));
                 estoque.remove(idProduto);
                 produtos.remove(idProduto);
-                System.out.println("Produto '" + produto.getNome() + "' removido do estoque.");
+                System.out.println("Produto '" + produto.getNome() + "' removido do estoque e do banco de dados.");
             } else {
                 throw new IllegalStateException("Produto não encontrado no estoque");
             }
@@ -275,9 +297,9 @@ public class Estoque implements Runnable {
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao remover produto", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (IllegalStateException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao remover produto", e);
         }
@@ -285,7 +307,7 @@ public class Estoque implements Runnable {
 
     public static Map<Integer, Produto> getProdutos() {
         try {
-            return new HashMap<>(produtos); // Retorna uma cópia para evitar modificações externas
+            return new HashMap<>(produtos);
         } catch (Exception e) {
             throw new RuntimeException("Erro ao obter produtos", e);
         }
