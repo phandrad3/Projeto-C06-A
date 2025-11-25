@@ -83,7 +83,7 @@ public class AddProdutoController {
         Produto produto;
         switch (tipo) {
             case "Eletrônicos":
-                produto = new Eletronico(nome, preco);
+                produto = new Eletronicos(nome, preco);
                 break;
             case "Frutas":
                 produto = new Frutas(nome, preco);

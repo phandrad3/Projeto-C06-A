@@ -24,7 +24,7 @@ public class Main {
             Produto novoProduto;
             switch (tipo) {
                 case "Eletrônicos":
-                    novoProduto = new Eletronico(nome, preco);
+                    novoProduto = new Eletronicos(nome, preco);
                     break;
                 case "Frutas":
                     novoProduto = new Frutas(nome, preco);

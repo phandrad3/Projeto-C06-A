@@ -34,11 +34,11 @@ public abstract class Produto {
     public String toString() {return getId() +" " +getNome(); }
 
     public String getTipo() {
-        if (this instanceof Eletronico) return "Eletrônicos";
+        if (this instanceof Eletronicos) return "Eletrônicos";
         if (this instanceof Frutas) return "Frutas";
         if (this instanceof Frios) return "Frios";
         if (this instanceof Verduras) return "Verduras";
-        return "Não perecíveis";
+        return "Não Perecíveis";
     }
 
     @Override
