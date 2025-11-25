@@ -42,7 +42,6 @@ public class Estoque implements Runnable {
                 Thread.sleep(INTERVALO_VERIFICACAO);
             }
         } catch (InterruptedException e) {
-            System.out.println("Monitor de estoque interrompido.");
             executando = false;
             Thread.currentThread().interrupt();
         } catch (Exception e) {

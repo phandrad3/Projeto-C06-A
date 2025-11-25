@@ -3,6 +3,7 @@ package com.example.lojabumi.controllers.produto_controller;
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Usuario;
+import com.example.lojabumi.usuario.tipoConta.Administrador;
 import com.example.lojabumi.usuario.tipoConta.Cliente;
 import com.example.lojabumi.utilitarios.Verificacoes;
 import javafx.fxml.FXML;
@@ -97,10 +98,7 @@ public class ProdutosController {
                     Estoque.pararMonitoramento();
                 }
         );
-        btncarrinho.setOnAction(e -> {
-                    mudarTela(btncarrinho, "/view/Carrinho.fxml");
-                }
-        );
+
         carregarProdutos();
     }
 
@@ -118,5 +116,21 @@ public class ProdutosController {
         }
         mudarTela(estoque, "/view/Estoque.fxml");
     }
+
+    public void entrarCarrinho() {
+
+        Usuario usuario = Verificacoes.getUsuarioLogado();
+
+        if (usuario instanceof Administrador) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Acesso negado");
+            alert.setHeaderText(null);
+            alert.setContentText("Apenas clientes podem acessar o carrinho!");
+            alert.showAndWait();
+            return;
+        }
+            mudarTela(estoque, "/view/Carrinho.fxml");
+    }
+
 
 }
