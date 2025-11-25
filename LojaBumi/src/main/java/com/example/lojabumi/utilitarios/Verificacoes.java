@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class Verificacoes {
 
-    private static ArrayList<Object> cacheUsuarios = new ArrayList<>();
     private static Usuario usuarioLogado;
 
     public static String converterDataParaISO(String dataBrasil) {
@@ -42,7 +41,6 @@ public class Verificacoes {
         Usuario usuarioBD = buscarUsuarioPorEmail(email, senha);
 
         if (usuarioBD != null) {
-            cacheUsuarios.add(usuarioBD);
             usuarioLogado = usuarioBD;
             return usuarioBD;
         }
