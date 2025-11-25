@@ -63,6 +63,12 @@ public class AddProdutoController {
             return;
         }
 
+        Integer idExistente = SupabaseConfig.getProdutoIdByNome(nome);
+        if (idExistente != null) {
+            new Alert(Alert.AlertType.ERROR, "Já existe um produto com o nome '" + nome + "'!").showAndWait();
+            return;
+        }
+
         double preco;
         int quantidade;
 
