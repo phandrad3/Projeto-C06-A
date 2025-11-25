@@ -1,4 +1,4 @@
-package com.example.lojabumi.Controllers;
+package com.example.lojabumi.controllers;
 
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;

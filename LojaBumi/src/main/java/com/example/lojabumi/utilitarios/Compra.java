@@ -14,9 +14,6 @@ public class Compra implements Permissao {
 
     private Compra() {}
 
-    public static Compra getInstance() {
-        return compra;
-    }
 
     @Override
     public boolean alterarEstoque() {
@@ -102,7 +99,4 @@ public class Compra implements Permissao {
         System.out.println("\n--- COMPRA FINALIZADA COM SUCESSO ---\n");
         return true;
     }
-
-
-
 }

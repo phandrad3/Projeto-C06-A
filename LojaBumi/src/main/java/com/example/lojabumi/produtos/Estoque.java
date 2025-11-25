@@ -13,7 +13,6 @@ public class Estoque implements Runnable {
     private static boolean alertaAtivo = false;
     private static Map<Integer, Integer> estoque = new HashMap<>();
     private static Map<Integer, Produto> produtos = new HashMap<>();
-
     private static final int LIMITE_CRITICO = 5;
     private static final int INTERVALO_VERIFICACAO = 30000; // 60 segundos
     private static Thread threadMonitor;
@@ -71,10 +70,9 @@ public class Estoque implements Runnable {
                 }
             }
 
-            if (abaixoEstoque && !alertaAtivo) { // Só mostra se não houver alerta ativo
+            if (abaixoEstoque && !alertaAtivo) {
                 System.out.println("ALERTA: " + mensagem.toString());
 
-                // Criar uma cópia da mensagem para usar no Platform.runLater
                 final String mensagemFinal = mensagem.toString();
 
                 Platform.runLater(() -> {
@@ -90,26 +88,25 @@ public class Estoque implements Runnable {
 
     private static void mostrarNotificacao(String mensagem) {
         try {
-            alertaAtivo = true; // Marca que o alerta está ativo
+            alertaAtivo = true;
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Alerta de Estoque Crítico");
             alert.setHeaderText("Produtos com estoque baixo!");
             alert.setContentText(mensagem);
 
-            // Adiciona um listener para quando o alerta for fechado
+
             alert.setOnHidden(event -> {
-                alertaAtivo = false; // Libera para novos alertas quando fechar
+                alertaAtivo = false;
             });
 
-            // Também adiciona um listener para quando o alerta for fechado com o botão OK
             alert.setOnCloseRequest(event -> {
-                alertaAtivo = false; // Libera para novos alertas quando fechar
+                alertaAtivo = false;
             });
 
             alert.show();
         } catch (Exception e) {
-            alertaAtivo = false; // Garante que a flag seja resetada em caso de erro
+            alertaAtivo = false;
             System.err.println("Erro ao criar alerta: " + e.getMessage());
             throw e;
         }
@@ -154,7 +151,7 @@ public class Estoque implements Runnable {
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao adicionar estoque", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao adicionar estoque", e);
         }
@@ -183,7 +180,7 @@ public class Estoque implements Runnable {
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao atualizar estoque", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao atualizar estoque", e);
         }
@@ -213,7 +210,7 @@ public class Estoque implements Runnable {
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao atualizar valor", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao atualizar valor", e);
         }
@@ -228,7 +225,7 @@ public class Estoque implements Runnable {
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao consultar estoque", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao consultar estoque", e);
         }
@@ -292,9 +289,9 @@ public class Estoque implements Runnable {
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao remover produto", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (IllegalStateException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao remover produto", e);
         }
@@ -302,7 +299,7 @@ public class Estoque implements Runnable {
 
     public static Map<Integer, Produto> getProdutos() {
         try {
-            return new HashMap<>(produtos); // Retorna uma cópia para evitar modificações externas
+            return new HashMap<>(produtos);
         } catch (Exception e) {
             throw new RuntimeException("Erro ao obter produtos", e);
         }

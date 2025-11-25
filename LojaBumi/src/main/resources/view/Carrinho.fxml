@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="30.0" style="-fx-padding: 50; -fx-background-color: #1E293B;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lojabumi.Controllers.Carrinho.CarrinhoController">
+<VBox alignment="CENTER" spacing="30.0" style="-fx-padding: 50; -fx-background-color: #1E293B;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lojabumi.controllers.carrinho.CarrinhoController">
     <children>
         <Label alignment="CENTER" text="Carrinho de Compras" textFill="WHITE">
             <font>

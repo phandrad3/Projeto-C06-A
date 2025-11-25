@@ -1,9 +1,10 @@
-package com.example.lojabumi.Controllers.Estoque;
+package com.example.lojabumi.controllers.estoque;
 
 import com.example.lojabumi.config.SupabaseConfig;
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Usuario;
+import com.example.lojabumi.utilitarios.Verificacoes;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -12,25 +13,21 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 import java.util.Locale;
-import java.util.Map;
 
-import static com.example.lojabumi.Controllers.MudarTela.mudarTela;
+import static com.example.lojabumi.controllers.MudarTela.mudarTela;
 
 public class AtualizarEstoqueController {
 
     @FXML
     private ChoiceBox<Produto> escolherProduto;
-
     @FXML
     private TextField precoField;
-
     @FXML
     private TextField quantidadeField;
-
     @FXML
     private Button btnVoltar;
 
-    private Usuario usuario = Usuario.getUsuarioLogado();
+    private Usuario usuario = Verificacoes.getUsuarioLogado();
 
     private void atualizarChoiceBox() {
         escolherProduto.getItems().clear();
@@ -51,7 +48,6 @@ public class AtualizarEstoqueController {
             return;
         }
 
-        // Buscar o ID real do produto no banco usando o nome
         Integer idProduto = SupabaseConfig.getProdutoIdByNome(produtoSelecionado.getNome());
         if (idProduto == null) {
             mostrarErro("Produto não encontrado no banco de dados.");
@@ -74,7 +70,6 @@ public class AtualizarEstoqueController {
             }
         }
 
-        // Verificar se a quantidade foi informada (é obrigatório)
         if (quantidadeField.getText().trim().isEmpty()) {
             mostrarErro("Digite a nova quantidade.");
             return;
@@ -87,10 +82,8 @@ public class AtualizarEstoqueController {
             return;
         }
 
-        // Formatar o preço para o JSON (usando ponto como separador decimal)
         String precoFormatado = String.format(Locale.US, "%.2f", novoPreco);
 
-        // Construir JSON com todos os campos necessários
         String jsonInputString = String.format(
                 Locale.US,
                 "{\"idProduto\": %d, \"nome\": \"%s\", \"quantidade\": %d, \"preco\": %s, \"tipoProduto\": \"%s\"}",

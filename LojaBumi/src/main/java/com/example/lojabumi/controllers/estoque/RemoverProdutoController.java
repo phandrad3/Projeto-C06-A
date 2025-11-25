@@ -1,14 +1,15 @@
-package com.example.lojabumi.Controllers.Estoque;
+package com.example.lojabumi.controllers.estoque;
 
 import com.example.lojabumi.config.SupabaseConfig;
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Usuario;
+import com.example.lojabumi.utilitarios.Verificacoes;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import static com.example.lojabumi.Controllers.MudarTela.mudarTela;
+import static com.example.lojabumi.controllers.MudarTela.mudarTela;
 
 public class RemoverProdutoController {
 
@@ -23,7 +24,7 @@ public class RemoverProdutoController {
     private ChoiceBox<Produto> escolherProduto;
 
 
-    private final Usuario usuario = Usuario.getUsuarioLogado();
+    private final Usuario usuario = Verificacoes.getUsuarioLogado();
 
     @FXML
     public void initialize() {

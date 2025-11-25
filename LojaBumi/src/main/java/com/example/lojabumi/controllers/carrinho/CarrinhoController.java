@@ -1,10 +1,11 @@
-package com.example.lojabumi.Controllers.Carrinho;
+package com.example.lojabumi.controllers.carrinho;
 
-import com.example.lojabumi.Controllers.MudarTela;
+import com.example.lojabumi.controllers.MudarTela;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Usuario;
 import com.example.lojabumi.usuario.tipoConta.Cliente;
 import com.example.lojabumi.utilitarios.Compra;
+import com.example.lojabumi.utilitarios.Verificacoes;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -19,7 +20,6 @@ public class CarrinhoController {
 
     @FXML
     private TableView<Produto> tableCarrinho;
-
     @FXML
     private TableColumn<Produto, String> colNome;
     @FXML
@@ -43,12 +43,11 @@ public class CarrinhoController {
 
     private Cliente clienteLogado;
 
-    // tipo de lista na qual, notifica qualquer mudança na lista, por isso foi associada ao tablecarrinho
     private ObservableList<Produto> carrinhoObservable = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-        Usuario usuario = Usuario.getUsuarioLogado();
+        Usuario usuario = Verificacoes.getUsuarioLogado();
         if (usuario instanceof Cliente) {
             clienteLogado = (Cliente) usuario;
         }

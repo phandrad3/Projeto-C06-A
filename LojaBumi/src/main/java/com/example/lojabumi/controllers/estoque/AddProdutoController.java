@@ -1,9 +1,10 @@
-package com.example.lojabumi.Controllers.Estoque;
+package com.example.lojabumi.controllers.estoque;
 
 import com.example.lojabumi.config.SupabaseConfig;
 import com.example.lojabumi.produtos.*;
 import com.example.lojabumi.produtos.tipo.*;
 import com.example.lojabumi.usuario.Usuario;
+import com.example.lojabumi.utilitarios.Verificacoes;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 
@@ -15,29 +16,22 @@ import javafx.scene.control.Alert;
 
 import java.util.Locale;
 
-import static com.example.lojabumi.Controllers.MudarTela.mudarTela;
+import static com.example.lojabumi.controllers.MudarTela.mudarTela;
 
 public class AddProdutoController {
 
-
     @FXML
     private TextField nomeField;
-
     @FXML
     private TextField precoField;
-
     @FXML
     private TextField quantidadeField;
-
     @FXML
     private ChoiceBox<String> tipoChoiceBox;
-
     @FXML
     private Button btnAdicionar;
-
     @FXML
     private Button btnVoltar;
-
 
     @FXML
     public void initialize() {
@@ -57,7 +51,7 @@ public class AddProdutoController {
 
 
     private void adicionarProduto() {
-        Usuario usuario = Usuario.getUsuarioLogado();
+        Usuario usuario = Verificacoes.getUsuarioLogado();
 
         String nome = nomeField.getText().trim();
         String precoText = precoField.getText().trim();

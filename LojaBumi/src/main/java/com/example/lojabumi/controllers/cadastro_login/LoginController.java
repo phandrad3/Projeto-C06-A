@@ -1,14 +1,15 @@
-package com.example.lojabumi.Controllers.Cadastro_Login;
+package com.example.lojabumi.controllers.cadastro_login;
 
 import com.example.lojabumi.usuario.Usuario;
 import com.example.lojabumi.usuario.tipoConta.Administrador;
 import com.example.lojabumi.produtos.Estoque;
+import com.example.lojabumi.utilitarios.Verificacoes;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-import static com.example.lojabumi.Controllers.MudarTela.mudarTela;
+import static com.example.lojabumi.controllers.MudarTela.mudarTela;
 
 public class LoginController {
     @FXML
@@ -37,7 +38,7 @@ public class LoginController {
                 throw new IllegalArgumentException("Formato de email inválido.");
             }
 
-            Usuario usuario = Usuario.validarCredenciais(email, senha);
+            Usuario usuario = Verificacoes.validarCredenciais(email, senha);
 
             if (usuario != null) {
                 if (usuario instanceof Administrador) {

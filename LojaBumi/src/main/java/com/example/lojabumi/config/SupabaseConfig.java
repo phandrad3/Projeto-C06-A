@@ -75,38 +75,6 @@ public class SupabaseConfig {
         }
     }
 
-    public static boolean deleteDataByNome(String tableName, String nome) {
-        try {
-            // Codificar o nome para URL
-            String nomeEncoded = URLEncoder.encode(nome, StandardCharsets.UTF_8.toString());
-            URL url = new URL(SUPABASE_URL + "/rest/v1/" + tableName + "?nome=eq." + nomeEncoded);
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("DELETE");
-            conn.setRequestProperty("apikey", SUPABASE_KEY);
-            conn.setRequestProperty("Authorization", "Bearer " + SUPABASE_KEY);
-            conn.setRequestProperty("Content-Type", "application/json");
-
-            int responseCode = conn.getResponseCode();
-            if (responseCode != 204) { // 204 No Content é o código esperado para DELETE
-                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-                String inputLine;
-                StringBuilder response = new StringBuilder();
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                in.close();
-                System.out.println("Falha ao remover dados. Código: " + responseCode);
-                System.out.println("Resposta: " + response.toString());
-                return false;
-            }
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     public static boolean updateData(String tableName, String id, String jsonInputString) {
         try {
             URL url = new URL(SUPABASE_URL + "/rest/v1/" + tableName + "?idProduto=eq." + id);
@@ -178,7 +146,7 @@ public class SupabaseConfig {
                 // Retorna o ID do primeiro produto encontrado
                 return getInt(produtos.get(0), "idProduto");
             } else {
-                System.out.println("❌ Falha ao buscar ID do produto. Código: " + responseCode);
+                System.out.println("Falha ao buscar ID do produto. Código: " + responseCode);
                 return null;
             }
         } catch (Exception e) {
@@ -345,7 +313,7 @@ public class SupabaseConfig {
 
                 return parseJsonArrayToMaps(response.toString());
             } else {
-                System.out.println("❌ Falha ao recuperar dados. Código: " + responseCode);
+                System.out.println("Falha ao recuperar dados. Código: " + responseCode);
 
                 try (BufferedReader br = new BufferedReader(
                         new InputStreamReader(connection.getErrorStream(), StandardCharsets.UTF_8))) {
@@ -359,7 +327,7 @@ public class SupabaseConfig {
                 return new ArrayList<>();
             }
         } catch (IOException e) {
-            System.err.println("❌ Erro na recuperação de dados: " + e.getMessage());
+            System.err.println("Erro na recuperação de dados: " + e.getMessage());
             return new ArrayList<>();
         }
     }

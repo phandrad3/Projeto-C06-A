@@ -1,4 +1,4 @@
-package com.example.lojabumi.Controllers.Estoque;
+package com.example.lojabumi.controllers.estoque;
 
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-import static com.example.lojabumi.Controllers.MudarTela.mudarTela;
+import static com.example.lojabumi.controllers.MudarTela.mudarTela;
 
 public class EstoqueController {
 
