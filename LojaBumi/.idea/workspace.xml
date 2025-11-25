@@ -7,21 +7,9 @@
     <list default="true" id="6aaef6ac-a81e-4e88-9833-ce66d8c16b86" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Cadastro_Login/CadastroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Cadastro_Login/CadastroController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Carrinho/CarrinhoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Carrinho/CarrinhoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/EstoqueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/EstoqueController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/Cadastro.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/Cadastro.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/Carrinho.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/Carrinho.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/AddProduto.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/AtualizarEstoque.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/Cadastro.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/Carrinho.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/Estoque.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/Login.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/Produtos.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/RemoverEstoque.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/RemoverProduto.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/AtualizarEstoqueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/AtualizarEstoqueController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/config/SupabaseConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/config/SupabaseConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/Produto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,12 +32,12 @@
     &quot;assignee&quot;: &quot;Armengolz&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/phandrad3/Projeto-C06-A.git",
-    "accountId": "cbdd85b8-3191-4d19-b33e-125a41f34749"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/phandrad3/Projeto-C06-A.git&quot;,
+    &quot;accountId&quot;: &quot;cbdd85b8-3191-4d19-b33e-125a41f34749&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -67,13 +55,14 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;Application.SupabaseConfig.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Desconto__e__ajustes__tabela&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
