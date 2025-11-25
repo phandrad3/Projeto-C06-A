@@ -36,45 +36,6 @@ public class SupabaseConfig {
         }
     }
 
-    public static boolean updateDataByNome(String tableName, String nome, String jsonInputString) {
-        try {
-            // Codificar o nome para URL
-            String nomeEncoded = URLEncoder.encode(nome, StandardCharsets.UTF_8.toString());
-            URL url = new URL(SUPABASE_URL + "/rest/v1/" + tableName + "?nome=eq." + nomeEncoded);
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("PUT");
-            conn.setRequestProperty("apikey", SUPABASE_KEY);
-            conn.setRequestProperty("Authorization", "Bearer " + SUPABASE_KEY);
-            conn.setRequestProperty("Content-Type", "application/json");
-            conn.setRequestProperty("Prefer", "return=representation");
-
-            conn.setDoOutput(true);
-            OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
-            writer.write(jsonInputString);
-            writer.flush();
-            writer.close();
-
-            int responseCode = conn.getResponseCode();
-            if (responseCode != 200) {
-                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-                String inputLine;
-                StringBuilder response = new StringBuilder();
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                in.close();
-                System.out.println("Falha ao atualizar dados. Código: " + responseCode);
-                System.out.println("Resposta: " + response.toString());
-                return false;
-            }
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     public static boolean updateData(String tableName, String id, String jsonInputString) {
         try {
             URL url = new URL(SUPABASE_URL + "/rest/v1/" + tableName + "?idProduto=eq." + id);
@@ -132,18 +93,15 @@ public class SupabaseConfig {
                 }
                 in.close();
 
-                // Se a resposta for um array vazio, retorna null
                 if (response.toString().equals("[]")) {
                     return null;
                 }
 
-                // Converte o JSON para Map
                 List<Map<String, Object>> produtos = parseJsonArrayToMaps(response.toString());
                 if (produtos.isEmpty()) {
                     return null;
                 }
 
-                // Retorna o ID do primeiro produto encontrado
                 return getInt(produtos.get(0), "idProduto");
             } else {
                 System.out.println("Falha ao buscar ID do produto. Código: " + responseCode);
