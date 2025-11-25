@@ -100,8 +100,8 @@ public class AddProdutoController {
 
             String jsonInputString = String.format(
                     Locale.US,
-                    "{\"idProduto\": %d, \"nome\": \"%s\", \"quantidade\": %d, \"preco\": %s, \"tipoProduto\": \"%s\"}",
-                    produto.getId(), produto.getNome(), quantidade, precoFormatado, tipo
+                    "{\"nome\": \"%s\", \"quantidade\": %d, \"preco\": %s, \"tipoProduto\": \"%s\"}",
+                    produto.getNome(), quantidade, precoFormatado, tipo
             );
 
             System.out.println("DEBUG JSON: " + jsonInputString);

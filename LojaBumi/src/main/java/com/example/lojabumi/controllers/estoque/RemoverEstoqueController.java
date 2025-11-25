@@ -1,12 +1,19 @@
 package com.example.lojabumi.controllers.estoque;
 
+import com.example.lojabumi.config.SupabaseConfig;
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Usuario;
 import com.example.lojabumi.utilitarios.Verificacoes;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+import java.util.Locale;
 
 import static com.example.lojabumi.controllers.MudarTela.mudarTela;
 
@@ -26,7 +33,6 @@ public class RemoverEstoqueController {
 
     private Usuario usuario = Verificacoes.getUsuarioLogado();
 
-
     private void atualizarChoiceBox() {
         escolherProduto.getItems().clear();
         escolherProduto.getItems().addAll(Estoque.getProdutos().values());
@@ -42,10 +48,8 @@ public class RemoverEstoqueController {
         quantidadeAtualLabel.setText("Quantidade Atual: " + qtd);
     }
 
-
     @FXML
     private void removerEstoque() {
-
         Produto produto = escolherProduto.getValue();
 
         if (produto == null) {
@@ -63,28 +67,61 @@ public class RemoverEstoqueController {
             return;
         }
 
-        int quantidade;
+        int quantidadeRemover;
         try {
-            quantidade = Integer.parseInt(quantidadeRemoverField.getText().trim());
+            quantidadeRemover = Integer.parseInt(quantidadeRemoverField.getText().trim());
+            if (quantidadeRemover <= 0) {
+                mostrarErro("A quantidade deve ser maior que zero.");
+                return;
+            }
         } catch (Exception e) {
             mostrarErro("Quantidade inválida.");
             return;
         }
 
-        boolean sucesso = Estoque.removerEstoque(produto, quantidade, usuario);
+        Integer idProduto = SupabaseConfig.getProdutoIdByNome(produto.getNome());
+        if (idProduto == null) {
+            mostrarErro("Produto não encontrado no banco de dados.");
+            return;
+        }
 
-        if (!sucesso) {
+        int quantidadeAtual = Estoque.getEstoque(produto);
+
+        if (quantidadeAtual < quantidadeRemover) {
             mostrarErro("Não foi possível remover. Quantidade insuficiente no estoque.");
             return;
         }
 
-        mostrarInfo("Removido com sucesso!");
+        int novaQuantidade = quantidadeAtual - quantidadeRemover;
 
-        quantidadeAtualLabel.setText("Quantidade Atual: " + Estoque.getEstoque(produto));
-        quantidadeRemoverField.clear();
-        escolherProduto.getSelectionModel().clearSelection();
+        String nomeAtual = produto.getNome();
+        double precoAtual = produto.getPreco();
+        String tipoAtual = produto.getTipo();
+
+        String precoFormatado = String.format(Locale.US, "%.2f", precoAtual);
+
+        String jsonInputString = String.format(
+                Locale.US,
+                "{\"idProduto\": %d, \"nome\": \"%s\", \"quantidade\": %d, \"preco\": %s, \"tipoProduto\": \"%s\"}",
+                idProduto, nomeAtual, novaQuantidade, precoFormatado, tipoAtual
+        );
+
+        System.out.println("DEBUG JSON: " + jsonInputString);
+
+        boolean sucesso = SupabaseConfig.updateData("produtos",
+                String.valueOf(idProduto), jsonInputString);
+
+        if (sucesso) {
+            Estoque.removerEstoque(produto, quantidadeRemover, usuario);
+
+            atualizarQuantidade(produto);
+            quantidadeRemoverField.clear();
+
+            mostrarInfo("Removido com sucesso!");
+        } else {
+            mostrarErro("Erro ao atualizar estoque. Verifique os dados.");
+        }
     }
-
 
     private void mostrarErro(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -100,15 +137,12 @@ public class RemoverEstoqueController {
         alert.showAndWait();
     }
 
-
     @FXML
     public void initialize() {
-
         atualizarChoiceBox();
         btnVoltar.setOnAction(e -> {
-                    mudarTela(btnVoltar, "/view/Estoque.fxml");
-                }
-        );
+            mudarTela(btnVoltar, "/view/Estoque.fxml");
+        });
         Platform.runLater(() -> {
             escolherProduto.lookup(".label").setStyle("-fx-text-fill: white;");
         });

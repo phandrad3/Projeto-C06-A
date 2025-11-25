@@ -188,6 +188,50 @@ public class SupabaseConfig {
         }
     }
 
+    public static String insertDataAndGetResponse(String tableName, String jsonInputString) {
+        try {
+            URL url = new URL(SUPABASE_URL + "/rest/v1/" + tableName);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("apikey", SUPABASE_KEY);
+            conn.setRequestProperty("Authorization", "Bearer " + SUPABASE_KEY);
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Prefer", "return=representation");
+
+            conn.setDoOutput(true);
+            OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+            writer.write(jsonInputString);
+            writer.flush();
+            writer.close();
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode == 201) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                return response.toString();
+            } else {
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                System.out.println("Falha ao inserir dados. Código: " + responseCode);
+                System.out.println("Resposta: " + response.toString());
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static boolean deleteData(String tableName, String id) {
         try {
             URL url = new URL(SUPABASE_URL + "/rest/v1/" + tableName + "?idProduto=eq." + id);
