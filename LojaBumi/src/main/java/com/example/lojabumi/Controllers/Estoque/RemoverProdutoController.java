@@ -1,5 +1,6 @@
 package com.example.lojabumi.Controllers.Estoque;
 
+import com.example.lojabumi.config.SupabaseConfig;
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Usuario;
@@ -10,8 +11,6 @@ import javafx.scene.control.*;
 import static com.example.lojabumi.Controllers.MudarTela.mudarTela;
 
 public class RemoverProdutoController {
-
-
     @FXML
     private Button btnRemover;
 
@@ -21,15 +20,12 @@ public class RemoverProdutoController {
     @FXML
     private ChoiceBox<Produto> escolherProduto;
 
-
     private final Usuario usuario = Usuario.getUsuarioLogado();
 
     @FXML
     public void initialize() {
         btnVoltar.setOnAction(e -> mudarTela(btnVoltar, "/view/Estoque.fxml"));
-
         btnRemover.setOnAction(e -> removerProduto());
-
         Platform.runLater(() -> {
             escolherProduto.lookup(".label").setStyle("-fx-text-fill: white;");
         });
@@ -43,7 +39,6 @@ public class RemoverProdutoController {
 
     @FXML
     private void removerProduto() {
-
         Produto produtoSelecionado = escolherProduto.getValue();
         if (produtoSelecionado == null) {
             mostrarErro("Selecione um produto.");
@@ -58,15 +53,15 @@ public class RemoverProdutoController {
         boolean sucesso = Estoque.removerProduto(produtoSelecionado, usuario);
 
         if (sucesso) {
+            //deletando no banco
+            SupabaseConfig.deleteData("produtos", produtoSelecionado.getId());
             mostrarInfo("Produto removido com sucesso!");
             atualizarChoiceBox();
             escolherProduto.getSelectionModel().clearSelection();
-
         } else {
             mostrarErro("Erro ao remover produto.");
         }
     }
-
 
     private void mostrarErro(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

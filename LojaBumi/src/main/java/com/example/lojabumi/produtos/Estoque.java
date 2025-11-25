@@ -1,5 +1,6 @@
 package com.example.lojabumi.produtos;
 
+import com.example.lojabumi.config.SupabaseConfig;
 import com.example.lojabumi.usuario.Permissao;
 import com.example.lojabumi.usuario.Usuario;
 import javafx.application.Platform;
@@ -15,7 +16,7 @@ public class Estoque implements Runnable {
     private static Map<Integer, Produto> produtos = new HashMap<>();
 
     private static final int LIMITE_CRITICO = 5;
-    private static final int INTERVALO_VERIFICACAO = 30000; // 60 segundos
+    private static final int INTERVALO_VERIFICACAO = 30000;
     private static Thread threadMonitor;
     private static boolean executando = false;
 
@@ -26,7 +27,6 @@ public class Estoque implements Runnable {
                 threadMonitor = new Thread(new Estoque());
                 threadMonitor.setDaemon(true);
                 threadMonitor.start();
-                System.out.println("Monitor de estoque iniciado.");
             }
         } catch (SecurityException e) {
             throw new IllegalStateException("Erro de segurança ao iniciar monitoramento", e);
@@ -43,7 +43,6 @@ public class Estoque implements Runnable {
                 Thread.sleep(INTERVALO_VERIFICACAO);
             }
         } catch (InterruptedException e) {
-            System.out.println("Monitor de estoque interrompido.");
             executando = false;
             Thread.currentThread().interrupt();
         } catch (Exception e) {
@@ -71,47 +70,32 @@ public class Estoque implements Runnable {
                 }
             }
 
-            if (abaixoEstoque && !alertaAtivo) { // Só mostra se não houver alerta ativo
-                System.out.println("ALERTA: " + mensagem.toString());
-
-                // Criar uma cópia da mensagem para usar no Platform.runLater
+            if (abaixoEstoque && !alertaAtivo) {
                 final String mensagemFinal = mensagem.toString();
-
                 Platform.runLater(() -> {
                     mostrarNotificacao(mensagemFinal);
                 });
             }
         } catch (Exception e) {
-            System.err.println("Erro crítico no monitoramento de estoque: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
-
     private static void mostrarNotificacao(String mensagem) {
         try {
-            alertaAtivo = true; // Marca que o alerta está ativo
-
+            alertaAtivo = true;
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Alerta de Estoque Crítico");
             alert.setHeaderText("Produtos com estoque baixo!");
             alert.setContentText(mensagem);
-
-            // Adiciona um listener para quando o alerta for fechado
             alert.setOnHidden(event -> {
-                alertaAtivo = false; // Libera para novos alertas quando fechar
+                alertaAtivo = false;
             });
-
-            // Também adiciona um listener para quando o alerta for fechado com o botão OK
             alert.setOnCloseRequest(event -> {
-                alertaAtivo = false; // Libera para novos alertas quando fechar
+                alertaAtivo = false;
             });
-
             alert.show();
         } catch (Exception e) {
-            alertaAtivo = false; // Garante que a flag seja resetada em caso de erro
-            System.err.println("Erro ao criar alerta: " + e.getMessage());
-            throw e;
+            alertaAtivo = false;
         }
     }
 
@@ -120,7 +104,6 @@ public class Estoque implements Runnable {
             executando = false;
             if (threadMonitor != null) {
                 threadMonitor.interrupt();
-                System.out.println("Monitor de estoque finalizado.");
             }
         } catch (SecurityException e) {
             throw new IllegalStateException("Erro de segurança ao parar monitoramento", e);
@@ -134,27 +117,20 @@ public class Estoque implements Runnable {
             if (!usuario.addEstoque()) {
                 throw new IllegalStateException("Usuário não tem permissão para adicionar estoque");
             }
-
             if (produto == null) {
                 throw new IllegalArgumentException("Produto não pode ser nulo");
             }
-
             if (quantidade <= 0) {
                 throw new IllegalArgumentException("Quantidade deve ser positiva");
             }
-
             int idProduto = produto.getId();
             estoque.put(idProduto, estoque.getOrDefault(idProduto, 0) + quantidade);
             produtos.put(idProduto, produto);
-
-            System.out.println("Estoque atualizado: " + quantidade + " unidade(s) do produto '" +
-                    produto.getNome() + "' (ID: " + idProduto + ") adicionadas.");
-
             return true;
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao adicionar estoque", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao adicionar estoque", e);
         }
@@ -165,25 +141,20 @@ public class Estoque implements Runnable {
             if (!usuario.alterarEstoque()) {
                 throw new IllegalStateException("Usuário não tem permissão para atualizar estoque");
             }
-
             if (produto == null) {
                 throw new IllegalArgumentException("Produto não pode ser nulo");
             }
-
             if (novaQuantidade < 0) {
                 throw new IllegalArgumentException("Quantidade não pode ser negativa");
             }
-
             int idProduto = produto.getId();
             estoque.put(idProduto, novaQuantidade);
             produtos.put(idProduto, produto);
-
-            System.out.println("Quantidade atualizada do produto '" + produto.getNome() + "' para " + novaQuantidade);
             return true;
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao atualizar estoque", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao atualizar estoque", e);
         }
@@ -194,26 +165,19 @@ public class Estoque implements Runnable {
             if (!usuario.alterarPreco()) {
                 throw new IllegalStateException("Usuário não tem permissão para atualizar valor");
             }
-
             if (produto == null) {
                 throw new IllegalArgumentException("Produto não pode ser nulo");
             }
-
             if (novoValor <= 0) {
                 throw new IllegalArgumentException("Valor deve ser positivo");
             }
-
             int idProduto = produto.getId();
             produto.setPreco(novoValor);
-
-            System.out.println("Valor do produto '" + produto.getNome() + "' (ID: " + idProduto +
-                    ") atualizado para R$ " + novoValor);
-
             return true;
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao atualizar valor", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao atualizar valor", e);
         }
@@ -228,7 +192,7 @@ public class Estoque implements Runnable {
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao consultar estoque", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao consultar estoque", e);
         }
@@ -239,30 +203,25 @@ public class Estoque implements Runnable {
             if (!usuario.alterarEstoque()) {
                 throw new IllegalStateException("Usuário não tem permissão para remover estoque");
             }
-
             if (produto == null) {
                 throw new IllegalArgumentException("Produto não pode ser nulo");
             }
-
             if (quantidade <= 0) {
                 throw new IllegalArgumentException("Quantidade deve ser positiva");
             }
-
             int idProduto = produto.getId();
             int estoqueAtual = getEstoque(produto);
-
             if (estoqueAtual < quantidade) {
                 throw new IllegalStateException("Estoque insuficiente. Disponível: " + estoqueAtual + ", solicitado: " + quantidade);
             }
-
             estoque.put(idProduto, estoqueAtual - quantidade);
             return true;
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao remover estoque", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (IllegalStateException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao remover estoque", e);
         }
@@ -273,28 +232,24 @@ public class Estoque implements Runnable {
             if (!usuario.removerProduto()) {
                 throw new IllegalStateException("Usuário não tem permissão para remover produto");
             }
-
             if (produto == null) {
                 throw new IllegalArgumentException("Produto não pode ser nulo");
             }
-
             int idProduto = produto.getId();
-
             if (estoque.containsKey(idProduto)) {
                 estoque.remove(idProduto);
                 produtos.remove(idProduto);
-                System.out.println("Produto '" + produto.getNome() + "' removido do estoque.");
+                SupabaseConfig.deleteData("produtos", idProduto);
             } else {
                 throw new IllegalStateException("Produto não encontrado no estoque");
             }
-
             return true;
         } catch (NullPointerException e) {
             throw new IllegalStateException("Erro de referência nula ao remover produto", e);
         } catch (IllegalArgumentException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (IllegalStateException e) {
-            throw e; // Repassa exceções já tratadas
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Erro inesperado ao remover produto", e);
         }
@@ -302,7 +257,7 @@ public class Estoque implements Runnable {
 
     public static Map<Integer, Produto> getProdutos() {
         try {
-            return new HashMap<>(produtos); // Retorna uma cópia para evitar modificações externas
+            return new HashMap<>(produtos);
         } catch (Exception e) {
             throw new RuntimeException("Erro ao obter produtos", e);
         }

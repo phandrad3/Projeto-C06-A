@@ -31,7 +31,6 @@ public class SupabaseConfig {
             }
             return hexString.toString();
         } catch (Exception e) {
-            System.err.println("Erro ao gerar hash SHA-256: " + e.getMessage());
             return null;
         }
     }
@@ -61,11 +60,32 @@ public class SupabaseConfig {
                     response.append(inputLine);
                 }
                 in.close();
-                System.out.println("Falha ao inserir dados. Código: " + responseCode);
-                System.out.println("Resposta: " + response.toString());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+        }
+    }
+
+    public static void deleteData(String tableName, int id) {
+        try {
+            String urlStr = SUPABASE_URL + "/rest/v1/" + tableName + "?idProduto=eq." + id;
+            URL url = new URL(urlStr);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("DELETE");
+            conn.setRequestProperty("apikey", SUPABASE_KEY);
+            conn.setRequestProperty("Authorization", "Bearer " + SUPABASE_KEY);
+            conn.setRequestProperty("Content-Type", "application/json");
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode != 204) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+            }
+        } catch (Exception e) {
         }
     }
 
@@ -92,7 +112,6 @@ public class SupabaseConfig {
 
             return response.toString();
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -165,8 +184,6 @@ public class SupabaseConfig {
 
                 return parseJsonArrayToMaps(response.toString());
             } else {
-                System.out.println("❌ Falha ao recuperar dados. Código: " + responseCode);
-
                 try (BufferedReader br = new BufferedReader(
                         new InputStreamReader(connection.getErrorStream(), StandardCharsets.UTF_8))) {
                     StringBuilder response = new StringBuilder();
@@ -174,12 +191,10 @@ public class SupabaseConfig {
                     while ((responseLine = br.readLine()) != null) {
                         response.append(responseLine.trim());
                     }
-                    System.out.println("Resposta: " + response.toString());
                 }
                 return new ArrayList<>();
             }
         } catch (IOException e) {
-            System.err.println("❌ Erro na recuperação de dados: " + e.getMessage());
             return new ArrayList<>();
         }
     }

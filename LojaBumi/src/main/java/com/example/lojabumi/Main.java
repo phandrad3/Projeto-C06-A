@@ -39,7 +39,6 @@ public class Main {
                 default:
                     novoProduto = new NaoPereciveis(nome, preco);
             }
-
             Estoque.adicionarEstoque(novoProduto, quantidade, sistema);
         }
         com.example.lojabumi.HelloApplication.main(args);

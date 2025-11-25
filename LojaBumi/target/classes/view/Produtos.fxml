@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="25.0" style="-fx-padding: 50; -fx-background-color: #1E293B;"
+      xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.lojabumi.Controllers.Produtos.ProdutosController">
+
+    <TitledPane animated="false" collapsible="false"
+                style="-fx-background-color: #1E293B; -fx-text-fill: black;" text="Menu">
+        <content>
+            <AnchorPane prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #1E293B;">
+                <children>
+                    <Button fx:id="sair" layoutX="20.0" layoutY="10.0" prefHeight="40.0" prefWidth="100.0"
+                            style="-fx-font-size: 16px; -fx-background-color: #334155;" text="Sair" textFill="WHITE" />
+                    <Button fx:id="estoque" onAction="#entrarEstoque"  layoutX="140.0" layoutY="10.0" prefHeight="40.0" prefWidth="160.0"
+                            style="-fx-font-size: 16px; -fx-background-color: #334155;" text="Ir para Estoque"
+                            textFill="WHITE" />
+                    <Button fx:id="btncarrinho" layoutX="320.0" layoutY="10.0" prefHeight="40.0" prefWidth="160.0"
+                            style="-fx-font-size: 16px; -fx-background-color: #334155;" text="Ver Carrinho" textFill="WHITE" />
+                </children>
+            </AnchorPane>
+        </content>
+        <font>
+            <Font name="Candara" size="16.0" />
+        </font>
+    </TitledPane>
+
+    <Label style="-fx-font-weight: italic; -fx-font-size: 50px;" text="Produtos" textFill="WHITE">
+        <font>
+            <Font name="System Italic" size="50.0" />
+        </font>
+    </Label>
+
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+        <GridPane fx:id="gridProdutos" alignment="CENTER" hgap="150.0" vgap="50.0"
+                  style="-fx-padding: 40; -fx-background-color: #1E293B;">
+            <columnConstraints>
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+        </GridPane>
+    </ScrollPane>
+</VBox>

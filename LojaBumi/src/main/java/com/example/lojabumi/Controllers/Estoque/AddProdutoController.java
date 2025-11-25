@@ -6,20 +6,13 @@ import com.example.lojabumi.produtos.tipo.*;
 import com.example.lojabumi.usuario.Usuario;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-
-
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 
 import java.util.Locale;
 
 import static com.example.lojabumi.Controllers.MudarTela.mudarTela;
 
 public class AddProdutoController {
-
-
     @FXML
     private TextField nomeField;
 
@@ -38,27 +31,20 @@ public class AddProdutoController {
     @FXML
     private Button btnVoltar;
 
-
     @FXML
     public void initialize() {
         tipoChoiceBox.getItems().addAll("Eletrônicos", "Frutas", "Frios", "Verduras", "Não perecíveis");
-
         btnAdicionar.setOnAction(e -> adicionarProduto());
-
         btnVoltar.setOnAction(e -> {
-                    mudarTela(btnVoltar, "/view/Estoque.fxml"
-                    );
-                }
-        );
+            mudarTela(btnVoltar, "/view/Estoque.fxml");
+        });
         Platform.runLater(() -> {
             tipoChoiceBox.lookup(".label").setStyle("-fx-text-fill: white;");
         });
     }
 
-
     private void adicionarProduto() {
         Usuario usuario = Usuario.getUsuarioLogado();
-
         String nome = nomeField.getText().trim();
         String precoText = precoField.getText().trim();
         String quantidadeText = quantidadeField.getText().trim();
@@ -103,25 +89,18 @@ public class AddProdutoController {
             new Alert(Alert.AlertType.INFORMATION, "Produto adicionado com sucesso!").showAndWait();
             String tableName = "produtos";
             String precoFormatado = String.format(Locale.US, "%.2f", preco);
-
             String jsonInputString = String.format(
                     Locale.US,
                     "{\"idProduto\": %d, \"nome\": \"%s\", \"quantidade\": %d, \"preco\": %s, \"tipoProduto\": \"%s\"}",
                     produto.getId(), produto.getNome(), quantidade, precoFormatado, tipo
             );
-
-            System.out.println("DEBUG JSON: " + jsonInputString);
-
             SupabaseConfig.insertData(tableName, jsonInputString);
-
             nomeField.clear();
             precoField.clear();
             quantidadeField.clear();
             tipoChoiceBox.getSelectionModel().clearSelection();
-
         } else {
             new Alert(Alert.AlertType.ERROR, "Não foi possível adicionar o produto.").showAndWait();
         }
     }
-
 }
