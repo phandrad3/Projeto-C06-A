@@ -14,7 +14,7 @@ public class Estoque implements Runnable {
     private static Map<Integer, Integer> estoque = new HashMap<>();
     private static Map<Integer, Produto> produtos = new HashMap<>();
     private static final int LIMITE_CRITICO = 5;
-    private static final int INTERVALO_VERIFICACAO = 30000; // 60 segundos
+    private static final int INTERVALO_VERIFICACAO = 30000; // 30 segundos
     private static Thread threadMonitor;
     private static boolean executando = false;
 
