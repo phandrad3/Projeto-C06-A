@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6aaef6ac-a81e-4e88-9833-ce66d8c16b86" name="Changes" comment="Descontos na pagina de carrinho e mudança na tela de cadastro" />
+    <list default="true" id="6aaef6ac-a81e-4e88-9833-ce66d8c16b86" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/AtualizarEstoqueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/Controllers/Estoque/AtualizarEstoqueController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/config/SupabaseConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/config/SupabaseConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lojabumi/produtos/Produto.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,12 +32,12 @@
     &quot;assignee&quot;: &quot;Armengolz&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/phandrad3/Projeto-C06-A.git",
-    "accountId": "cbdd85b8-3191-4d19-b33e-125a41f34749"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/phandrad3/Projeto-C06-A.git&quot;,
+    &quot;accountId&quot;: &quot;cbdd85b8-3191-4d19-b33e-125a41f34749&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -49,13 +55,14 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;Application.SupabaseConfig.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Desconto__e__ajustes__tabela&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
@@ -83,19 +90,6 @@
       <option name="presentableId" value="Default" />
       <updated>1762877741497</updated>
     </task>
-    <task id="LOCAL-00001" summary="Descontos na pagina de carrinho e mudança na tela de cadastro">
-      <option name="closed" value="true" />
-      <created>1764016410178</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1764016410178</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Descontos na pagina de carrinho e mudança na tela de cadastro" />
-    <option name="LAST_COMMIT_MESSAGE" value="Descontos na pagina de carrinho e mudança na tela de cadastro" />
   </component>
 </project>

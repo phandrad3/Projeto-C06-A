@@ -1,5 +1,6 @@
 package com.example.lojabumi.Controllers.Estoque;
 
+import com.example.lojabumi.config.SupabaseConfig;
 import com.example.lojabumi.produtos.Estoque;
 import com.example.lojabumi.produtos.Produto;
 import com.example.lojabumi.usuario.Usuario;
@@ -43,7 +44,6 @@ public class RemoverProdutoController {
 
     @FXML
     private void removerProduto() {
-
         Produto produtoSelecionado = escolherProduto.getValue();
         if (produtoSelecionado == null) {
             mostrarErro("Selecione um produto.");
@@ -55,13 +55,30 @@ public class RemoverProdutoController {
             return;
         }
 
-        boolean sucesso = Estoque.removerProduto(produtoSelecionado, usuario);
+        Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacao.setTitle("Confirmar Remoção");
+        confirmacao.setHeaderText(null);
+        confirmacao.setContentText("Tem certeza que deseja remover o produto " + produtoSelecionado.getNome() + "?");
+
+        if (confirmacao.showAndWait().get() != ButtonType.OK) {
+            return;
+        }
+
+        Integer idProduto = SupabaseConfig.getProdutoIdByNome(produtoSelecionado.getNome());
+        if (idProduto == null) {
+            mostrarErro("Produto não encontrado no banco de dados.");
+            return;
+        }
+
+        boolean sucesso = SupabaseConfig.deleteData("produtos",
+                String.valueOf(idProduto));
 
         if (sucesso) {
+            Estoque.removerProduto(produtoSelecionado, usuario);
+
             mostrarInfo("Produto removido com sucesso!");
             atualizarChoiceBox();
             escolherProduto.getSelectionModel().clearSelection();
-
         } else {
             mostrarErro("Erro ao remover produto.");
         }

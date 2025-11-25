@@ -1,5 +1,7 @@
 package com.example.lojabumi.produtos;
 
+import com.example.lojabumi.produtos.tipo.*;
+
 public abstract class Produto {
     private static int nextId = 1;
     private int id;
@@ -30,6 +32,14 @@ public abstract class Produto {
     }
 
     public String toString() {return getId() +" " +getNome(); }
+
+    public String getTipo() {
+        if (this instanceof Eletronico) return "Eletrônicos";
+        if (this instanceof Frutas) return "Frutas";
+        if (this instanceof Frios) return "Frios";
+        if (this instanceof Verduras) return "Verduras";
+        return "Não perecíveis";
+    }
 
     @Override
     public boolean equals(Object o) {

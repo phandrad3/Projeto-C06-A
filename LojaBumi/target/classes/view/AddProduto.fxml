@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="30.0" style="-fx-padding: 50; -fx-background-color: #1E293B;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lojabumi.Controllers.Estoque.AddProdutoController">
+    <children>
+        <!-- Título -->
+        <Label alignment="CENTER" style="-fx-font-family: 'Constantia Italic'; -fx-font-size: 50;" text="Adicionar Produto" textFill="WHITE" />
+
+        <!-- Campo Nome -->
+        <VBox spacing="10.0">
+            <children>
+                <Label style="-fx-font-size: 25;" text="Nome do Produto" textFill="WHITE" />
+                <TextField fx:id="nomeField" prefWidth="400.0" promptText="Digite o nome..." style="-fx-background-color: #334155; -fx-text-fill: white; -fx-prompt-text-fill: #94A3B8; -fx-font-size: 20;" />
+            </children>
+        </VBox>
+
+        <!-- Campo Preço -->
+        <VBox spacing="10.0">
+            <children>
+                <Label style="-fx-font-size: 25;" text="Preço (R$)" textFill="WHITE" />
+                <TextField fx:id="precoField" prefWidth="400.0" promptText="Digite o preço..." style="-fx-background-color: #334155; -fx-text-fill: white; -fx-prompt-text-fill: #94A3B8; -fx-font-size: 20;" />
+            </children>
+        </VBox>
+
+        <!-- Campo Quantidade -->
+        <VBox spacing="10.0">
+            <children>
+                <Label style="-fx-font-size: 25;" text="Quantidade" textFill="WHITE" />
+                <TextField fx:id="quantidadeField" prefWidth="400.0" promptText="Digite a quantidade..." style="-fx-background-color: #334155; -fx-text-fill: white; -fx-prompt-text-fill: #94A3B8; -fx-font-size: 20;" />
+            </children>
+        </VBox>
+
+        <!-- Campo Tipo -->
+        <VBox spacing="10.0">
+            <children>
+                <Label style="-fx-font-size: 25;" text="Tipo" textFill="WHITE" />
+                <ChoiceBox fx:id="tipoChoiceBox" prefWidth="400.0" style="-fx-background-color: #334155; -fx-text-fill: WHITE; -fx-font-size: 20;" />
+            </children>
+        </VBox>
+
+        <!-- Botões -->
+        <VBox spacing="15.0">
+            <children>
+                <Button fx:id="btnAdicionar" prefWidth="200.0" style="-fx-background-color: #0EA5E9; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold; -fx-font-size: 20;" text="Adicionar Produto" />
+                <Button fx:id="btnVoltar" prefWidth="200.0" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold; -fx-font-size: 20;" text="Voltar" />
+            </children>
+        </VBox>
+    </children>
+</VBox>
